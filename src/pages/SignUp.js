@@ -1,18 +1,16 @@
-import React, { Fragment } from "react";
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
+import { Fragment } from "react";
 
-import Nav from "../components/Nav";
 import SignUpForm from "../components/SignUpForm";
 
 const SignUp = () => {
-  return(
+  return (
     <Fragment>
-      <Nav />
-      <main>
-        <h1>Skapa Konto</h1>
-        <SignUpForm />
-      </main>
+      <h1>Skapa Konto</h1>
+      <SignUpForm />
     </Fragment>
   );
-}
+};
 
 export default SignUp;

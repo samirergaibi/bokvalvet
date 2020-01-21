@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { useState } from "react";
 
-const HamburgerButton = () => {
+const HamburgerButton = ({ isClosed, setIsClosed }) => {
 
   const lineStyle = {
     position: "absolute",
@@ -22,7 +22,7 @@ const HamburgerButton = () => {
     content: '""',
     top: 0,
     transition: "top .1s cubic-bezier(.33333,0,.66667,.33333) .16s,transform .13s cubic-bezier(.215,.61,.355,1) .25s",
-    transform: "rotate(90deg)",
+    transform: "rotate(-90deg)",
   }
   const afterClosed = {
     content: '""',
@@ -51,7 +51,6 @@ const HamburgerButton = () => {
     transform: "translate3d(0,-10px,0) rotate(-45deg)",
   }
 
-  const [isClosed, setIsClosed] = useState(true);
   const [mainStyle, setMainStyle] = useState(mainClosed);
   const [beforeStyle, setBeforeStyle] = useState(beforeClosed);
   const [afterStyle, setAfterStyle] = useState(afterClosed);
@@ -71,8 +70,9 @@ const HamburgerButton = () => {
       }
     }} css={{
       position: "relative",
+      zIndex: 2,
       width: "40px",
-      height: "24px"
+      height: "24px",
     }}>
       <div
         css={{

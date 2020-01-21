@@ -1,14 +1,11 @@
-import React, { Fragment } from "react";
-
-import Nav from "../components/Nav";
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
+import { Fragment } from "react";
 
 const About = () => {
   return(
     <Fragment>
-      <Nav />
-      <main>
         <h1>Om Bokvalvet</h1>
-      </main>
     </Fragment>
   );
 }

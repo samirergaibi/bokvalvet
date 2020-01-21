@@ -1,6 +1,7 @@
-import React, { Fragment, useContext } from "react";
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
+import { Fragment, useContext } from "react";
 
-import Nav from "../components/Nav";
 import Search from "../components/Search";
 import SignInForm from "../components/SignInForm";
 import { UserContext } from "../components/AuthContext";
@@ -11,32 +12,29 @@ const Home = () => {
 
   return (
     <Fragment>
-      <Nav />
-      <main>
-        <h1>Välkommen till Bokvalvet</h1>
-        <Search />
-        {userContext.authRespReceived ? (
-          userContext.user ? (
-            <Fragment>
-              <p>{`Hejsan ${userContext.user.email}!`}</p>
-              <button
-                onClick={() => {
-                  firebase.auth().signOut();
-                }}
-              >
-                Logout
-              </button>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <h2>Sign In</h2>
-              <SignInForm />
-            </Fragment>
-          )
+      <h1>Välkommen till Bokvalvet</h1>
+      <Search />
+      {userContext.authRespReceived ? (
+        userContext.user ? (
+          <Fragment>
+            <p>{`Hejsan ${userContext.user.email}!`}</p>
+            <button
+              onClick={() => {
+                firebase.auth().signOut();
+              }}
+            >
+              Logout
+            </button>
+          </Fragment>
         ) : (
-          <p>loading...</p>
-        )}
-      </main>
+          <Fragment>
+            <h2>Sign In</h2>
+            <SignInForm />
+          </Fragment>
+        )
+      ) : (
+        <p>loading...</p>
+      )}
     </Fragment>
   );
 };
