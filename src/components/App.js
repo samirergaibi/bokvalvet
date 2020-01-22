@@ -4,14 +4,16 @@ import { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 
 import Home from "../pages/Home";
-import SignUp from "../pages/SignUp";
 import About from "../pages/About";
-import { AuthContext } from "./AuthContext";
+import SignUp from "../pages/SignUp";
+import Login from "../pages/Login";
+import AuthContext from "./AuthContext";
 import firebase from "../setupFirebase";
 import Layout from "./Layout";
+import Account from "../pages/Account";
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [authRespReceived, setAuthRespReceived] = useState(false);
 
   useEffect(() => {
@@ -33,6 +35,8 @@ function App() {
           <Home path="/" />
           <SignUp path="/skapa-konto" />
           <About path="/om-bokvalvet" />
+          <Login path="/logga-in" />
+          <Account path="/mitt-konto" />
         </Router>
       </Layout>
     </AuthContext.Provider>
