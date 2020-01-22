@@ -3,6 +3,8 @@ import { createContext } from "react";
 
 const defaultFirebaseContext = {
   authRespReceived: false,
-  user: {}
+  user: null
 }
-export const UserContext = createContext(defaultFirebaseContext);
+const AuthContext = createContext(defaultFirebaseContext);
+
+export default AuthContext;
