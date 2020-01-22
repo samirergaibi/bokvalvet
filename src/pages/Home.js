@@ -4,11 +4,11 @@ import { Fragment, useContext } from "react";
 
 import Search from "../components/Search";
 import SignInForm from "../components/SignInForm";
-import { UserContext } from "../components/AuthContext";
+import { AuthContext } from "../components/AuthContext";
 import firebase from "../setupFirebase";
 
 const Home = () => {
-  const userContext = useContext(UserContext);
+  const userContext = useContext(AuthContext);
 
   return (
     <Fragment>

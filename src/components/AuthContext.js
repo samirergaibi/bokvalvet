@@ -5,4 +5,4 @@ const defaultFirebaseContext = {
   authRespReceived: false,
   user: {}
 }
-export const UserContext = createContext(defaultFirebaseContext);
+export const AuthContext = createContext(defaultFirebaseContext);

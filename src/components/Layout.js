@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
   return (
     <Fragment>
       <header css={{
-        backgroundColor: "#347474"
+        backgroundColor: "#ff6464"
       }}>
         <div
           css={{
@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
         </div>
         <Nav isClosed={isClosed} setIsClosed={setIsClosed} />
       </header>
-      <main>{children}</main>
+      <main css={{height: "150vh"}}>{children}</main>
       <footer></footer>
     </Fragment>
   );

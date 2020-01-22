@@ -6,7 +6,7 @@ import { Router } from "@reach/router";
 import Home from "../pages/Home";
 import SignUp from "../pages/SignUp";
 import About from "../pages/About";
-import { UserContext } from "./AuthContext";
+import { AuthContext } from "./AuthContext";
 import firebase from "../setupFirebase";
 import Layout from "./Layout";
 
@@ -27,7 +27,7 @@ function App() {
   }, []);
 
   return (
-    <UserContext.Provider value={{ authRespReceived, user }}>
+    <AuthContext.Provider value={{ authRespReceived, user }}>
       <Layout>
         <Router>
           <Home path="/" />
@@ -35,7 +35,7 @@ function App() {
           <About path="/om-bokvalvet" />
         </Router>
       </Layout>
-    </UserContext.Provider>
+    </AuthContext.Provider>
   );
 }
 
