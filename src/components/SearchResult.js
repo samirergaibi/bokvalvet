@@ -8,7 +8,7 @@ import { FirebaseContext } from "./Firebase";
 const SearchResult = ({ result }) => {
   const {items: books} = result;
   const { user } = useContext(FirebaseContext);
-  console.log(result);
+  
   return (
     <div css={{
       width: "100%"

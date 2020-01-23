@@ -4,14 +4,25 @@ import { Fragment, useState } from "react";
 
 import SearchForm from "../components/SearchForm";
 import SearchResult from "../components/SearchResult";
-// import Pagination from "../components/Pagination";
 import Button from "../components/Button";
+import { searchForBook } from "../api/api";
 
 const Search = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResult] = useState();
   const [startIndex, setStartIndex] = useState(0);
 
-  console.log(startIndex);
+  function loadMore() {
+    searchForBook(searchTerm, startIndex).then(resp => {
+      setSearchResult(prev => {
+        return {
+          ...prev,
+          items: [...prev.items, ...resp.items]
+        };
+      });
+    });
+    setStartIndex(prev => prev + 10);
+  }
 
   return (
     <Fragment>
@@ -26,7 +37,11 @@ const Search = () => {
           }
         }}
       >
-        <SearchForm setSearchResult={setSearchResult} setStartIndex={setStartIndex} />
+        <SearchForm
+          setSearchResult={setSearchResult}
+          setStartIndex={setStartIndex}
+          setSearchTerm={setSearchTerm}
+        />
       </div>
       <div>
         {searchResult && (
@@ -42,8 +57,7 @@ const Search = () => {
             }}
           >
             <SearchResult result={searchResult} />
-            {/* <Pagination /> */}
-            <Button>Fler Resultat</Button>
+            <Button onClick={loadMore}>Fler Resultat</Button>
           </div>
         )}
       </div>

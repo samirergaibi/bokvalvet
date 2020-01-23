@@ -6,7 +6,7 @@ import { searchForBook } from "../api/api";
 import Input from "./Input";
 import SubmitButton from "./SubmitButton";
 
-const Search = ({ setSearchResult, setStartIndex }) => {
+const Search = ({ setSearchResult, setStartIndex, setSearchTerm }) => {
 
   const [searchInput, setSearchInput] = useState("");
 
@@ -19,9 +19,10 @@ const Search = ({ setSearchResult, setStartIndex }) => {
     if(searchInput){
       searchForBook(searchInput).then(resp => {
         setSearchResult(resp);
-        setStartIndex(prev => prev + 10);
+        setStartIndex(10);
       })
       setSearchInput("");
+      setSearchTerm(searchInput);
     }
   }
 

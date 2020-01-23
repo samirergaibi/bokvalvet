@@ -13,8 +13,9 @@ const Home = () => {
           textAlign: "center"
         }}
       >
-        Välkommen till Bokvalvet
+        Bokvalvet
       </h1>
+      <p css={{ textAlign: "center" }}>Var god och sök på en bok</p>
       <Search />
     </Fragment>
   );
