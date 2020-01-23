@@ -5,6 +5,6 @@ const defaultFirebaseContext = {
   authRespReceived: false,
   user: null
 }
-const AuthContext = createContext(defaultFirebaseContext);
+const FirebaseContext = createContext(defaultFirebaseContext);
 
-export default AuthContext;
+export default FirebaseContext;
