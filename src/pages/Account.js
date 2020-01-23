@@ -3,10 +3,10 @@ import { jsx } from "@emotion/core";
 import { Fragment, useContext, useEffect } from "react";
 import { navigate } from "@reach/router";
 
-import AuthContext from "../components/AuthContext";
+import { FirebaseContext } from "../components/Firebase";
 
 const Account = () => {
-  const { authRespReceived, user } = useContext(AuthContext);
+  const { authRespReceived, user } = useContext(FirebaseContext);
 
   useEffect(() => {
     if(authRespReceived && !user){

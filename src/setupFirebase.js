@@ -2,6 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBAUDp4P-FeBHaeYx4_NOoKjRX1Rnb7q-w",
   authDomain: "bokvalvet-a21e4.firebaseapp.com",
@@ -13,6 +14,7 @@ const firebaseConfig = {
   measurementId: "G-XB0P930K5L"
 };
 
-console.log("Firebase has been initialized.");
+// Initialize firebase with config
+console.log("FIREBASE HAS BEEN INITIALIZED")
 firebase.initializeApp(firebaseConfig);
 export default firebase;

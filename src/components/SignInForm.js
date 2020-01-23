@@ -3,9 +3,12 @@ import { jsx } from "@emotion/core";
 import { useState } from "react";
 import { navigate } from "@reach/router";
 
-import firebase from "../setupFirebase";
+import firebase from "./Firebase";
 import validateEmail from "../utils/validateEmail";
 import validatePassword from "../utils/validatePassword";
+import Input from "./Input";
+import SubmitButton from "./SubmitButton";
+import ErrorMsg from "./ErrorMsg";
 
 const SignInForm = () => {
   const [emailInput, setEmailInput] = useState("");
@@ -31,7 +34,7 @@ const SignInForm = () => {
         .auth()
         .signInWithEmailAndPassword(emailInput, passwordInput)
         .then(resp => {
-          navigate("/mitt-konto")
+          navigate("/mitt-konto");
         })
         .catch(err => {
           console.log(err);
@@ -46,7 +49,7 @@ const SignInForm = () => {
               setErrorMsg("Kontot exiterar inte.");
               break;
             case "auth/wrong-password":
-              setErrorMsg("Lösenordet som du angett är fel.");
+              setErrorMsg("Det angivna lösenordet är fel.");
               break;
             default:
               setErrorMsg(
@@ -59,32 +62,27 @@ const SignInForm = () => {
   }
 
   return (
-    <form onSubmit={loginUser}>
-      <input
+    <form
+      onSubmit={loginUser}
+      css={{
+        display: "flex",
+        flexDirection: "column"
+      }}
+    >
+      <Input
         type="text"
         value={emailInput}
         onChange={handleEmail}
         placeholder="E-postadress"
       />
-      <input
-        type="text"
+      <Input
+        type="password"
         value={passwordInput}
         onChange={handlePassword}
         placeholder="Lösenord"
       />
-      <button type="submit">Logga In</button>
-      {errorMsg && (
-        <p
-          css={{
-            textAlign: "center",
-            backgroundColor: "#fee9ed",
-            color: "#df5a71",
-            padding: "15px 0"
-          }}
-        >
-          {errorMsg}
-        </p>
-      )}
+      <SubmitButton text="Logga In" />
+      <ErrorMsg msg={errorMsg} />
     </form>
   );
 };

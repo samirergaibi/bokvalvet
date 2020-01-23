@@ -4,12 +4,11 @@ import { Link } from "@reach/router";
 import { Fragment, useContext } from "react";
 
 import mq from "../utils/mediaQueries";
-import AuthContext from "../components/AuthContext";
-import firebase from "../setupFirebase";
+import firebase, { FirebaseContext } from "./Firebase";
 
 
 const Nav = ({ isClosed, setIsClosed }) => {
-  const { authRespReceived, user } = useContext(AuthContext);
+  const { authRespReceived, user } = useContext(FirebaseContext);
 
   return (
     <nav css={{

@@ -2,53 +2,78 @@
 import { jsx } from "@emotion/core";
 import { useState } from "react";
 
-import firebase from "../setupFirebase";
-
+import firebase from "./Firebase";
 import validateEmail from "../utils/validateEmail";
 import validatePassword from "../utils/validatePassword";
+import Input from "./Input";
+import ErrorMsg from "./ErrorMsg";
+import SubmitButton from "./SubmitButton";
 
 const SignUpForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const [repeatPasswordInput, setRepeatPasswordInput] = useState("");
+  const [errorMsg, setErrorMsg] = useState();
 
   function handleEmail(e) {
-    setEmail(e.target.value);
+    setEmailInput(e.target.value);
   }
   function handlePassword(e) {
-    setPassword(e.target.value);
+    setPasswordInput(e.target.value);
+  }
+  function handleRepeatPassword(e) {
+    setRepeatPasswordInput(e.target.value);
   }
   function signUp(e) {
     e.preventDefault();
-    if (!validateEmail(email)) {
-      console.log("Ogiltig e-postadress.");
-    } else if (!validatePassword(password)) {
-      console.log("Lösenorder måste bestå av minst sex tecken.");
+    if (!validateEmail(emailInput)) {
+      setErrorMsg("Ogiltig e-postadress.");
+    } else if (
+      !validatePassword(passwordInput) &&
+      !validatePassword(repeatPasswordInput)
+    ) {
+      setErrorMsg("Lösenordet måste bestå av minst sex tecken.");
+    } else if (passwordInput !== repeatPasswordInput) {
+      setErrorMsg("De angivna lösenorden stämmer inte överens.");
     } else {
-      firebase.auth().createUserWithEmailAndPassword(email, password).catch(err => {
-        console.log(err);
-        console.log("Någonting gick fel, var god och försök igen.");
-      })
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(emailInput, passwordInput)
+        .catch(err => {
+          console.log(err);
+          setErrorMsg("Någonting gick fel, var god och försök igen.");
+        });
       console.log("Konto har skapats!");
     }
   }
   return (
-    <form onSubmit={signUp}>
-      <input
+    <form
+      onSubmit={signUp}
+      css={{
+        display: "flex",
+        flexDirection: "column"
+      }}
+    >
+      <Input
         type="text"
-        id="email"
-        value={email}
+        value={emailInput}
         onChange={handleEmail}
-        placeholder="E-post"
-        autoComplete="off"
+        placeholder="E-postadress"
       />
-      <input
-        type="text"
-        id="password"
-        value={password}
+      <Input
+        type="password"
+        value={passwordInput}
         onChange={handlePassword}
         placeholder="Lösenord"
       />
-      <button type="submit">Skapa Konto</button>
+      <Input
+        type="password"
+        value={repeatPasswordInput}
+        onChange={handleRepeatPassword}
+        placeholder="Upprepa Lösenord"
+      />
+      <SubmitButton text="Skapa Konto" />
+      <ErrorMsg msg={errorMsg} />
     </form>
   );
 };

@@ -7,8 +7,7 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
-import AuthContext from "./AuthContext";
-import firebase from "../setupFirebase";
+import firebase, { FirebaseContext } from "./Firebase";
 import Layout from "./Layout";
 import Account from "../pages/Account";
 
@@ -18,18 +17,13 @@ function App() {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        setUser(user);
-      } else {
-        console.log("USER IS NOT LOGGED IN");
-        setUser(user);
-      }
+      setUser(user);
       setAuthRespReceived(true);
     });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ authRespReceived, user }}>
+    <FirebaseContext.Provider value={{ authRespReceived, user }}>
       <Layout>
         <Router>
           <Home path="/" />
@@ -39,7 +33,7 @@ function App() {
           <Account path="/mitt-konto" />
         </Router>
       </Layout>
-    </AuthContext.Provider>
+    </FirebaseContext.Provider>
   );
 }
 
