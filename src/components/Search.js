@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 import SearchForm from "../components/SearchForm";
 import SearchResult from "../components/SearchResult";
@@ -13,16 +13,42 @@ const Search = () => {
   const [searchResult, setSearchResult] = useState();
   const [startIndex, setStartIndex] = useState(0);
   const amountToLoad = 9;
-  console.log(searchResult);
+
+  useEffect(() => {
+    if (window && localStorage.getItem("last-search") !== null) {
+      const { searchString, searchIndex, resp } = JSON.parse(
+        localStorage.getItem("last-search")
+      );
+      setSearchResult(resp);
+      setSearchTerm(searchString);
+      setStartIndex(searchIndex);
+    }
+  }, []);
 
   function loadMore() {
+    console.log(startIndex, "startIndex");
+    console.log(amountToLoad, "amountToLoad");
+    console.log(searchTerm, "searchTerm");
     searchForBook(searchTerm, startIndex, amountToLoad).then(resp => {
+      console.log(resp, "resp");
+      let previousAndNewResults;
       setSearchResult(prev => {
-        return {
+        previousAndNewResults = {
           ...prev,
           items: [...prev.items, ...resp.items]
         };
+        return previousAndNewResults;
       });
+      if (window) {
+        localStorage.setItem(
+          "last-search",
+          JSON.stringify({
+            searchString: searchTerm,
+            searchIndex: startIndex + amountToLoad,
+            resp: previousAndNewResults
+          })
+        );
+      }
     });
     setStartIndex(prev => prev + amountToLoad);
   }
@@ -76,18 +102,20 @@ const Search = () => {
               },
               [mq[3]]: {
                 width: "80vw"
-              },
+              }
             }}
           >
             <SearchResult result={searchResult} />
-            <div css={{
-              "& button": {
-                marginTop: 0,
-                [mq[2]]: {
-                  marginTop: "10vh"
+            <div
+              css={{
+                "& button": {
+                  marginTop: 0,
+                  [mq[2]]: {
+                    marginTop: "10vh"
+                  }
                 }
-              }
-            }}>
+              }}
+            >
               <PrimaryButton onClick={loadMore}>Ladda fler</PrimaryButton>
             </div>
           </div>

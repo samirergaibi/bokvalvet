@@ -28,7 +28,6 @@ const SearchResult = ({ result }) => {
     >
       {books.map(book => {
         return (
-          // book.volumeInfo.imageLinks &&
           <Fragment key={book.id}>
             <div css={{
               margin: "10vh auto",

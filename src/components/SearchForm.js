@@ -6,7 +6,12 @@ import { searchForBook } from "../api/api";
 import Input from "./Input";
 import PrimaryButton from "./PrimaryButton";
 
-const Search = ({ setSearchResult, setStartIndex, setSearchTerm, amountToLoad }) => {
+const Search = ({
+  setSearchResult,
+  setStartIndex,
+  setSearchTerm,
+  amountToLoad
+}) => {
   const [searchInput, setSearchInput] = useState("");
 
   function handleSearch(e) {
@@ -18,6 +23,16 @@ const Search = ({ setSearchResult, setStartIndex, setSearchTerm, amountToLoad })
     if (searchInput) {
       searchForBook(searchInput, 0, amountToLoad).then(resp => {
         setSearchResult(resp);
+        if (window) {
+          localStorage.setItem(
+            "last-search",
+            JSON.stringify({
+              searchString: searchInput,
+              searchIndex: amountToLoad,
+              resp
+            })
+          );
+        }
         setStartIndex(amountToLoad);
       });
       setSearchInput("");

@@ -7,6 +7,7 @@ import { useContext } from "react";
 import SecondaryButton from "./SecondaryButton";
 import mq from "../utils/mediaQueries";
 import { FirebaseContext } from "./Firebase";
+import noImageFound from "../images/no-image-found.jpg";
 
 const BookCard = ({ book: bookInfo }) => {
   const { user } = useContext(FirebaseContext);
@@ -21,7 +22,7 @@ const BookCard = ({ book: bookInfo }) => {
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         letterSpacing: "1px",
         backgroundColor: "#fdfdfd",
         padding: "4vh 2vh 4vh 2vh",
@@ -79,9 +80,7 @@ const BookCard = ({ book: bookInfo }) => {
           <img src={book.imageLinks.thumbnail} alt={`${book.title}`} />
         ) : (
           <img
-            src={
-              "http://www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg"
-            }
+            src={noImageFound}
             alt={`${book.title}`}
             css={{
               width: "210px",
