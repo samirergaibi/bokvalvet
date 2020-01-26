@@ -7,7 +7,7 @@ import firebase from "./Firebase";
 import validateEmail from "../utils/validateEmail";
 import validatePassword from "../utils/validatePassword";
 import Input from "./Input";
-import SubmitButton from "./SubmitButton";
+import PrimaryButton from "./PrimaryButton";
 import ErrorMsg from "./ErrorMsg";
 
 const SignInForm = () => {
@@ -81,7 +81,7 @@ const SignInForm = () => {
         onChange={handlePassword}
         placeholder="Lösenord"
       />
-      <SubmitButton text="Logga In" />
+      <PrimaryButton type="submit">Logga in</PrimaryButton>
       <ErrorMsg msg={errorMsg} />
     </form>
   );

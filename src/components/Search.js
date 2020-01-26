@@ -4,16 +4,19 @@ import { Fragment, useState } from "react";
 
 import SearchForm from "../components/SearchForm";
 import SearchResult from "../components/SearchResult";
-import Button from "../components/Button";
 import { searchForBook } from "../api/api";
+import mq from "../utils/mediaQueries";
+import PrimaryButton from "./PrimaryButton";
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResult] = useState();
   const [startIndex, setStartIndex] = useState(0);
+  const amountToLoad = 9;
+  console.log(searchResult);
 
   function loadMore() {
-    searchForBook(searchTerm, startIndex).then(resp => {
+    searchForBook(searchTerm, startIndex, amountToLoad).then(resp => {
       setSearchResult(prev => {
         return {
           ...prev,
@@ -21,7 +24,7 @@ const Search = () => {
         };
       });
     });
-    setStartIndex(prev => prev + 10);
+    setStartIndex(prev => prev + amountToLoad);
   }
 
   return (
@@ -30,10 +33,16 @@ const Search = () => {
         css={{
           width: "80vw",
           margin: "0 auto 5vh auto",
+          [mq[2]]: {
+            width: "30vw"
+          },
           "& button": {
             width: "40vw",
             marginLeft: "auto",
-            marginRight: "auto"
+            marginRight: "auto",
+            [mq[2]]: {
+              width: "10vw"
+            }
           }
         }}
       >
@@ -41,7 +50,19 @@ const Search = () => {
           setSearchResult={setSearchResult}
           setStartIndex={setStartIndex}
           setSearchTerm={setSearchTerm}
+          amountToLoad={amountToLoad}
         />
+        {searchTerm && searchResult && (
+          <p
+            css={{
+              textAlign: "center",
+              fontSize: "14px",
+              marginTop: "8px"
+            }}
+          >
+            "{searchTerm}" genererade {searchResult.totalItems} resultat.
+          </p>
+        )}
       </div>
       <div>
         {searchResult && (
@@ -50,14 +71,25 @@ const Search = () => {
               width: "80vw",
               margin: "5vh auto",
               textAlign: "center",
-              "& hr": {
-                width: "80vw",
-                margin: "10vh auto"
-              }
+              [mq[2]]: {
+                width: "90vw"
+              },
+              [mq[3]]: {
+                width: "80vw"
+              },
             }}
           >
             <SearchResult result={searchResult} />
-            <Button onClick={loadMore}>Fler Resultat</Button>
+            <div css={{
+              "& button": {
+                marginTop: 0,
+                [mq[2]]: {
+                  marginTop: "10vh"
+                }
+              }
+            }}>
+              <PrimaryButton onClick={loadMore}>Ladda fler</PrimaryButton>
+            </div>
           </div>
         )}
       </div>

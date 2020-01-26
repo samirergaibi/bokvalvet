@@ -12,7 +12,7 @@ const GoogleBtn = ({ onClick }) => {
         backgroundColor: "#fff",
         border: "1px solid #d6d9dc",
         outline: "none",
-        borderRadius: "5px",
+        borderRadius: "10px",
         padding: "10px 25px",
         width: "100%",
         ":hover": {

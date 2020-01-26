@@ -7,7 +7,7 @@ import validateEmail from "../utils/validateEmail";
 import validatePassword from "../utils/validatePassword";
 import Input from "./Input";
 import ErrorMsg from "./ErrorMsg";
-import SubmitButton from "./SubmitButton";
+import PrimaryButton from "./PrimaryButton";
 
 const SignUpForm = () => {
   const [emailInput, setEmailInput] = useState("");
@@ -72,7 +72,7 @@ const SignUpForm = () => {
         onChange={handleRepeatPassword}
         placeholder="Upprepa Lösenord"
       />
-      <SubmitButton text="Skapa Konto" />
+      <PrimaryButton type="submit">Skapa konto</PrimaryButton>
       <ErrorMsg msg={errorMsg} />
     </form>
   );

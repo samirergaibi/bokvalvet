@@ -2,16 +2,18 @@
 import { jsx } from "@emotion/core";
 
 
-const SubmitButton = ({ text }) => {
+const PrimaryButton = ({ children, type="button", onClick }) => {
   return (
     <button
-    type="submit"
+    onClick={onClick}
+    type={type}
     css={{
-      fontFamily: "'Roboto', sans-serif",
+      fontWeight: 600,
       fontSize: "16px",
+      letterSpacing: "1px",
       border: "1px solid #d6d9dc",
       outline: "none",
-      borderRadius: "5px",
+      borderRadius: "10px",
       padding: "10px 25px",
       backgroundColor: "#1DB954",
       color: "#fff",
@@ -23,9 +25,9 @@ const SubmitButton = ({ text }) => {
       }
     }}
   >
-    { text }
+    { children }
   </button>
   );
 }
 
-export default SubmitButton;
+export default PrimaryButton;
