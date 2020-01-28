@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { navigate } from "@reach/router";
 
 import SignInForm from "../components/SignInForm";
-import GoogleBtn from "../components/GoogleBtn";
+import GoogleButton from "../components/GoogleButton";
 import firebase from "../components/Firebase";
 import mq from "../utils/mediaQueries";
 
@@ -44,7 +44,7 @@ const Login = () => {
             margin: "40px 0px"
           }}
         >
-          <GoogleBtn onClick={loginWithGoogle} />
+          <GoogleButton onClick={loginWithGoogle} />
         </div>
       </div>
     </Fragment>

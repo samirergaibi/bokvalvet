@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 
+import "../setupIconLibrary";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import SignUp from "../pages/SignUp";
@@ -10,6 +11,7 @@ import Login from "../pages/Login";
 import firebase, { FirebaseContext } from "./Firebase";
 import Layout from "./Layout";
 import Account from "../pages/Account";
+import Book from "../pages/Book";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,6 +33,7 @@ function App() {
           <About path="/om-bokvalvet" />
           <Login path="/logga-in" />
           <Account path="/mitt-konto" />
+          <Book path="/bok/:id" />
         </Router>
       </Layout>
     </FirebaseContext.Provider>

@@ -4,37 +4,59 @@ import { useState } from "react";
 
 import { searchForBook } from "../api/api";
 import Input from "./Input";
-import SubmitButton from "./SubmitButton";
+import PrimaryButton from "./PrimaryButton";
 
-const Search = ({ setSearchResult, setStartIndex, setSearchTerm }) => {
-
+const Search = ({
+  setSearchResult,
+  setStartIndex,
+  setSearchTerm,
+  amountToLoad
+}) => {
   const [searchInput, setSearchInput] = useState("");
 
-  function handleSearch(e){
+  function handleSearch(e) {
     setSearchInput(e.target.value);
   }
 
-  function bookSearch(e){
+  function bookSearch(e) {
     e.preventDefault();
-    if(searchInput){
-      searchForBook(searchInput).then(resp => {
+    if (searchInput) {
+      searchForBook(searchInput, 0, amountToLoad).then(resp => {
         setSearchResult(resp);
-        setStartIndex(10);
-      })
+        if (window) {
+          localStorage.setItem(
+            "last-search",
+            JSON.stringify({
+              searchString: searchInput,
+              searchIndex: amountToLoad,
+              resp
+            })
+          );
+        }
+        setStartIndex(amountToLoad);
+      });
       setSearchInput("");
       setSearchTerm(searchInput);
     }
   }
 
   return (
-    <form onSubmit={bookSearch} css={{
-      display: "flex",
-      flexDirection: "column"
-    }}>
-      <Input type="text" value={searchInput} onChange={handleSearch} placeholder="Sökterm" />
-      <SubmitButton text="Sök" />
+    <form
+      onSubmit={bookSearch}
+      css={{
+        display: "flex",
+        flexDirection: "column"
+      }}
+    >
+      <Input
+        type="text"
+        value={searchInput}
+        onChange={handleSearch}
+        placeholder="Sökterm"
+      />
+      <PrimaryButton type="submit">Sök</PrimaryButton>
     </form>
   );
-}
+};
 
 export default Search;

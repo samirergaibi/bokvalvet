@@ -19,6 +19,9 @@ const Layout = ({ children }) => {
         top: "0",
         zIndex: "1",
         padding: "20px 20px",
+        [mq[2]]: {
+          padding: "10px 20px"
+        }
       }}>
         <div
           css={{

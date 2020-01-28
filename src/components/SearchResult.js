@@ -1,62 +1,49 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Fragment, useContext } from "react";
-import { Link } from "@reach/router";
+import { Fragment } from "react";
 
-import { FirebaseContext } from "./Firebase";
+import BookCard from "./BookCard";
+import mq from "../utils/mediaQueries";
 
 const SearchResult = ({ result }) => {
-  const {items: books} = result;
-  const { user } = useContext(FirebaseContext);
-  
+  const { items: books } = result;
+
   return (
-    <div css={{
-      width: "100%"
-    }}>
-      {
-        books.map(book => {
-          return (
-            <div key={book.id} css={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              ":last-of-type hr": {
-                display: "none"
+    <div
+      css={{
+        width: "100%",
+        gridGap: "50px",
+        [mq[2]]: {
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gridGap: "60px 60px"
+        },
+        [mq[3]]: {
+          gridGap: "50px 100px"
+        },
+        [mq[4]]: {
+          gridGap: "100px 200px"
+        }
+      }}
+    >
+      {books.map(book => {
+        return (
+          <Fragment key={book.id}>
+            <div css={{
+              margin: "10vh auto",
+              [mq[2]]: {
+                margin: "0",
+                width: "100%",
+                height: "100%"
               }
             }}>
-              {
-                book.volumeInfo.imageLinks &&
-                <Fragment>
-                  <Link to={`book/${book.id}`} css={{
-                    textDecoration: "none",
-                    color: "#000"
-                  }}>
-                    <h3>{book.volumeInfo.title}</h3>
-                  </Link>
-                  <Link to={`book/${book.id}`}>
-                    <img src={book.volumeInfo.imageLinks.thumbnail} alt={`${book.volumeInfo.title}`} />
-                  </Link>
-                  {
-                    user &&
-                    <button css={{
-                      width: "40vw",
-                      marginTop: "2vh",
-                      padding: "10px 15px",
-                      backgroundColor: "#e9ecef",
-                      border: "1px solid #e9ecef",
-                      borderRadius: "5px",
-                      outline: "none"
-                    }}>Lägg till i bokvalv</button>
-                  }
-                  <hr />
-                </Fragment>
-              }
+              <BookCard book={book} />
             </div>
-          );
-        })
-      }
+          </Fragment>
+        );
+      })}
     </div>
   );
-}
+};
 
 export default SearchResult;
