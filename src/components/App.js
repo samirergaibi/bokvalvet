@@ -12,6 +12,7 @@ import firebase, { FirebaseContext } from "./Firebase";
 import Layout from "./Layout";
 import Account from "../pages/Account";
 import Book from "../pages/Book";
+import BookVault from "../pages/BookVault";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -32,8 +33,9 @@ function App() {
           <SignUp path="/skapa-konto" />
           <About path="/om-bokvalvet" />
           <Login path="/logga-in" />
-          <Account path="/mitt-konto" />
+          <Account path="/konto" />
           <Book path="/bok/:id" />
+          <BookVault path="/bokvalv" />
         </Router>
       </Layout>
     </FirebaseContext.Provider>

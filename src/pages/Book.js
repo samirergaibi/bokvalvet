@@ -13,7 +13,6 @@ const Book = ({ id }) => {
   useEffect(() => {
     getBook(id).then(resp => {
       setBook(resp.volumeInfo);
-      console.log(resp.volumeInfo);
     });
   }, [id]);
   // if (book) {
@@ -50,9 +49,8 @@ const Book = ({ id }) => {
                     <a
                       key={`${author}-${i}`}
                       href={`https://www.google.se/search?q=${author}`}
+                      rel="noreferrer noopener"
                       target="_blank"
-                      rel="noreferrer"
-                      rel="noopener"
                       css={{
                         textDecoration: "none",
                         color: "#0000EE"

@@ -12,7 +12,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (authRespReceived && user) {
-      navigate("/mitt-konto");
+      navigate("/konto");
     }
   }, [authRespReceived, user]);
 

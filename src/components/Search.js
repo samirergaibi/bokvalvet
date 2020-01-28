@@ -26,11 +26,7 @@ const Search = () => {
   }, []);
 
   function loadMore() {
-    console.log(startIndex, "startIndex");
-    console.log(amountToLoad, "amountToLoad");
-    console.log(searchTerm, "searchTerm");
     searchForBook(searchTerm, startIndex, amountToLoad).then(resp => {
-      console.log(resp, "resp");
       let previousAndNewResults;
       setSearchResult(prev => {
         previousAndNewResults = {

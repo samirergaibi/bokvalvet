@@ -8,6 +8,7 @@ import SecondaryButton from "./SecondaryButton";
 import mq from "../utils/mediaQueries";
 import { FirebaseContext } from "./Firebase";
 import noImageFound from "../images/no-image-found.jpg";
+import addBookToVault from "../database/addBookToVault";
 
 const BookCard = ({ book: bookInfo }) => {
   const { user } = useContext(FirebaseContext);
@@ -15,6 +16,10 @@ const BookCard = ({ book: bookInfo }) => {
   if (book.authors && book.authors.length > 2) {
     book.authors = book.authors.slice(0, 2);
     book.authors.push("m.fl.");
+  }
+  function addBook(){
+    const image = book.imageLinks ? book.imageLinks.thumbnail : null;
+    addBookToVault(user.uid, bookInfo.id, book.title, image, book.authors);
   }
   return (
     <div
@@ -90,7 +95,7 @@ const BookCard = ({ book: bookInfo }) => {
       </Link>
       <div css={{ marginTop: "20px" }}>
         {user ? (
-          <SecondaryButton>Lägg till i bokvalv</SecondaryButton>
+          <SecondaryButton onClick={addBook}>Lägg till i bokvalv</SecondaryButton>
         ) : (
           <SecondaryButton disabled>Lägg till i bokvalv</SecondaryButton>
         )}
