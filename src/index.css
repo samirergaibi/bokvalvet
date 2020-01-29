@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
-* {
+html {
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 hmtl, body {

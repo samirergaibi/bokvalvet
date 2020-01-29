@@ -1,4 +1,4 @@
-import { db } from "../components/Firebase";
+import firebase, { db } from "../components/Firebase";
 
 function addBookToVault(userId, bookId, title, imageUrl, authors){
   db.collection("vaultBooks").doc(`${userId}&${bookId}`).set({
@@ -6,7 +6,8 @@ function addBookToVault(userId, bookId, title, imageUrl, authors){
     book_id: bookId,
     title,
     image_url: imageUrl,
-    authors
+    authors,
+    added: firebase.firestore.FieldValue.serverTimestamp()
   })
     .then(() => {
       console.log("Document added.");

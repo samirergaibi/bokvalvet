@@ -13,7 +13,6 @@ const Login = () => {
   function loginWithGoogle(){
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(result => {
-      console.log(result);
       navigate("/konto")
     }).catch(err => {
       console.log(err);

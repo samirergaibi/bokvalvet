@@ -11,17 +11,20 @@ const PrimaryButton = ({ children, type="button", onClick }) => {
       fontWeight: 600,
       fontSize: "16px",
       letterSpacing: "1px",
-      border: "1px solid #d6d9dc",
+      border: "none",
       outline: "none",
       borderRadius: "10px",
-      padding: "10px 25px",
+      padding: "11px 26px",
       backgroundColor: "#1DB954",
       color: "#fff",
       cursor: "pointer",
       marginTop: "20px",
-      transition: "all 0.3s",
+      transition: "all 0.3s ease 0s",
+      boxShadow: "0 5px 10px rgba(0, 0, 0, 0.2)",
       ":hover": {
-        backgroundColor: "#1ED760"
+        backgroundColor: "#1ED760",
+        transform: "translateY(-4px)",
+        boxShadow: "0 9px 10px rgba(0, 0, 0, 0.3)",
       }
     }}
   >

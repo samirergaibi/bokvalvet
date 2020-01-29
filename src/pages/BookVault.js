@@ -1,108 +1,90 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Fragment, useState, useEffect, useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { db, FirebaseContext } from "../components/Firebase";
-import imageNotFound from "../images/no-image-found.jpg";
 import bigBook from "../images/big-book.png";
-import SecondaryButton from "../components/SecondaryButton";
+import mq from "../utils/mediaQueries";
+import VaultBook from "../components/VaultBook";
+import ConfirmPopup from "../components/ConfirmPopup";
+import deleteBookFromVault from "../database/deleteBookFromVault";
 
 const BookVault = () => {
   const { user } = useContext(FirebaseContext);
 
   const [books, setBooks] = useState([]);
+  const [bookToRemove, setBookToRemove] = useState();
+  const [popupIsVisible, setPopupIsVisible] = useState(false);
 
   useEffect(() => {
     if (user) {
-      db.collection("vaultBooks")
-        .where("user_id", "==", user.uid)
-        .get()
-        .then(querySnapshot => {
-          let allBooks = [];
-          querySnapshot.forEach(doc => {
-            allBooks.push(doc.data());
-          });
-          setBooks(allBooks);
+      const unsubscribe = db.collection("vaultBooks").onSnapshot(snapshot => {
+        let allBooks = [];
+        snapshot.forEach(doc => {
+          allBooks.push(doc.data());
         });
+        allBooks.reverse();
+        setBooks(allBooks);
+      });
+      return unsubscribe;
     }
   }, [user]);
 
+  function deleteBook(id) {
+    deleteBookFromVault(user.uid, id);
+  }
+
   return (
     <Fragment>
-      <h1 css={{ textAlign: "center" }}>Bokvalv</h1>
-      <img
-        src={bigBook}
-        alt="apple on stacked books"
-        css={{
-          width: "60vw",
-          margin: "0 auto",
-          display: "block"
-        }}
+      <ConfirmPopup
+        visible={popupIsVisible}
+        setVisible={setPopupIsVisible}
+        deleteBook={deleteBook}
+        bookToRemove={bookToRemove}
       />
+      <div
+        css={{
+          textAlign: "center",
+          width: "90vw",
+          margin: "0 auto",
+          lineHeight: "1.6",
+          letterSpacing: "1px",
+          [mq[3]]: {
+            width: "40vw",
+            marginBottom: "2vh"
+          }
+        }}
+      >
+        <h1 css={{ margin: 0 }}>Bokvalv</h1>
+        <img
+          src={bigBook}
+          alt="apple on stacked books"
+          css={{
+            width: "80%",
+            margin: "0 auto",
+            display: "block",
+            [mq[3]]: {
+              width: "50%"
+            }
+          }}
+        />
+        <p css={{ marginTop: 0 }}>
+          Ditt personliga bokvalv är en digital bokhylla där du inte enbart kan
+          förvara din böcker, utan även skriva egna sammanfattningar.
+          <br />
+          <br />
+          Sätt igång direkt och ha allt samlat på en och samma plats.
+        </p>
+      </div>
       {books.map(book => {
         return (
-          <Fragment>
-            <hr css={{width: "40vw"}} />
-            <div
-              key={book.book_id}
-              css={{
-                display: "flex",
-                justifyContent: "start",
-                margin: "10vh 0",
-                width: "95vw",
-              }}
-            >
-              {book.image_url ? (
-                <img
-                  src={book.image_url}
-                  alt={book.title}
-                  css={{ width: "30vw" }}
-                />
-              ) : (
-                <img
-                  src={imageNotFound}
-                  alt={book.title}
-                  css={{ width: "30vw" }}
-                />
-              )}
-              <div
-                css={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  width: "100%",
-                  margin: "0 5px"
-                }}
-              >
-                <div>
-                  <h2 css={{ fontSize: "20px", margin: "0" }}>{book.title}</h2>
-                  {book.authors.map(author => (
-                    <p css={{ margin: 0 }}>
-                      <i>{author}</i>
-                    </p>
-                  ))}
-                </div>
-                <div
-                  css={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <SecondaryButton>Mer Information</SecondaryButton>
-                  <button css={{
-                    border: "none",
-                    backgroundColor: "#fb3f3f",
-                    padding: "10px 20px",
-                    borderRadius: "10px",
-                    fontSize: "17px"
-                  }}>
-                    <FontAwesomeIcon icon="trash-alt" css={{color: "#fff"}} />
-                  </button>
-                </div>
-              </div>
-            </div>
-            {/* <hr /> */}
+          <Fragment key={book.book_id}>
+            <hr css={{ width: "40vw" }} />
+            <VaultBook
+              book={book}
+              setBookToRemove={setBookToRemove}
+              setPopupIsVisible={setPopupIsVisible}
+            />
           </Fragment>
         );
       })}

@@ -3,10 +3,13 @@ import {
   faBook,
   faFeatherAlt,
   faTags,
-  faTrashAlt
+  faTrashAlt,
+  faBookOpen,
+  faArrowRight,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  faCalendarAlt
+  faCalendarAlt,
 } from "@fortawesome/free-regular-svg-icons";
 
-library.add(faBook, faCalendarAlt, faFeatherAlt, faTags, faTrashAlt);
+library.add(faBook, faCalendarAlt, faFeatherAlt, faTags, faTrashAlt, faBookOpen, faArrowRight, faTimes);

@@ -18,10 +18,13 @@ const SecondaryButton = (props) => {
         outline: "none",
         padding: "10px 20px",
         cursor: "pointer",
-        transition: "all 0.3s",
+        transition: "all 0.3s ease 0s",
+        boxShadow: "0 5px 10px rgba(0, 0, 0, 0.2)",
         ":hover": {
           backgroundColor: "#479ad3",
-          border: "1px solid #479ad3"
+          border: "1px solid #479ad3",
+          transform: "translateY(-4px)",
+          boxShadow: "0 9px 10px rgba(0, 0, 0, 0.3)",
         },
         ":disabled": {
           color: "#d7d7d7",
@@ -29,7 +32,9 @@ const SecondaryButton = (props) => {
           cursor: "not-allowed",
           ":hover": {
             backgroundColor: "#3282b8",
-            border: "1px solid #3282b8"
+            border: "1px solid #3282b8",
+            transform: "initial",
+            boxShadow: "0 5px 10px rgba(0, 0, 0, 0.2)",
           }
         }
       }}

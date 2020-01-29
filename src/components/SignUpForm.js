@@ -70,7 +70,7 @@ const SignUpForm = () => {
             user
               .updateProfile({
                 displayName: `${firstnameInput} ${lastnameInput}`,
-                photoURL: `https://eu.ui-avatars.com/api/?name=${firstnameInput}+${lastnameInput}&background=${randomColor}&color=fff&rounded=true&size=128`
+                photoURL: `https://eu.ui-avatars.com/api/?name=${firstnameInput}+${lastnameInput}&background=${randomColor}&color=fff&rounded=true&size=300`
               })
               .then(() => {
                 navigate("/konto");
