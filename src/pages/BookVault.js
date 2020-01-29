@@ -18,14 +18,18 @@ const BookVault = () => {
 
   useEffect(() => {
     if (user) {
-      const unsubscribe = db.collection("vaultBooks").onSnapshot(snapshot => {
-        let allBooks = [];
-        snapshot.forEach(doc => {
-          allBooks.push(doc.data());
+      const unsubscribe = db
+        .collection("vaultBooks")
+        .where("user_id", "==", user.uid)
+        .orderBy("added", "asc")
+        .onSnapshot(snapshot => {
+          let allBooks = [];
+          snapshot.forEach(doc => {
+            allBooks.push(doc.data());
+          });
+          allBooks.reverse();
+          setBooks(allBooks);
         });
-        allBooks.reverse();
-        setBooks(allBooks);
-      });
       return unsubscribe;
     }
   }, [user]);

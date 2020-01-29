@@ -23,8 +23,12 @@ const PrimaryButton = ({ children, type="button", onClick }) => {
       boxShadow: "0 5px 10px rgba(0, 0, 0, 0.2)",
       ":hover": {
         backgroundColor: "#1ED760",
-        transform: "translateY(-4px)",
-        boxShadow: "0 9px 10px rgba(0, 0, 0, 0.3)",
+        transform: "translateY(-2px)",
+        boxShadow: "0 7px 10px rgba(0, 0, 0, 0.3)",
+      },
+      ":focus": {
+        transform: "translateY(2px)",
+        boxShadow: "0 3px 10px rgba(0, 0, 0, 0.3)",
       }
     }}
   >

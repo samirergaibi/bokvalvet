@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "@reach/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import SecondaryButton from "./SecondaryButton";
 import mq from "../utils/mediaQueries";
@@ -11,15 +11,21 @@ import noImageFound from "../images/no-image-found.jpg";
 import addBookToVault from "../database/addBookToVault";
 
 const BookCard = ({ book: bookInfo }) => {
+  const [added, setAdded] = useState(false);
+
   const { user } = useContext(FirebaseContext);
   const { volumeInfo: book } = bookInfo;
   if (book.authors && book.authors.length > 2) {
     book.authors = book.authors.slice(0, 2);
     book.authors.push("m.fl.");
   }
-  function addBook(){
+  function addBook() {
     const image = book.imageLinks ? book.imageLinks.thumbnail : null;
-    addBookToVault(user.uid, bookInfo.id, book.title, image, book.authors);
+    addBookToVault(user.uid, bookInfo.id, book.title, image, book.authors).then(resp => {
+      if(resp){
+        setAdded(true);
+      }
+    });
   }
   return (
     <div
@@ -30,16 +36,13 @@ const BookCard = ({ book: bookInfo }) => {
         justifyContent: "space-between",
         letterSpacing: "1px",
         backgroundColor: "#fdfdfd",
-        padding: "4vh 2vh 4vh 2vh",
+        padding: "4vh 2vh 2vh 2vh",
         borderRadius: "10px",
         boxShadow:
           "0 1px 1px rgba(0,0,0,0.11), 0 2px 2px rgba(0,0,0,0.11), 0 4px 4px rgba(0,0,0,0.11), 0 6px 8px rgba(0,0,0,0.11), 0 8px 16px rgba(0,0,0,0.11)",
         [mq[2]]: {
           width: "100%",
           height: "100%"
-        },
-        "& p": {
-          margin: 0
         }
       }}
     >
@@ -71,7 +74,9 @@ const BookCard = ({ book: bookInfo }) => {
           {
             <div>
               {book.authors.map((author, i) => (
-                <p key={`${author}-${i}`}>{author}</p>
+                <p css={{ margin: 0 }} key={`${author}-${i}`}>
+                  {author}
+                </p>
               ))}
             </div>
           }
@@ -88,17 +93,29 @@ const BookCard = ({ book: bookInfo }) => {
             src={noImageFound}
             alt={`${book.title}`}
             css={{
-              width: "210px",
+              width: "210px"
             }}
           />
         )}
       </Link>
       <div css={{ marginTop: "20px" }}>
         {user ? (
-          <SecondaryButton onClick={addBook}>Lägg till i bokvalv</SecondaryButton>
+          <SecondaryButton onClick={addBook}>
+            Lägg till i bokvalv
+          </SecondaryButton>
         ) : (
           <SecondaryButton disabled>Lägg till i bokvalv</SecondaryButton>
         )}
+        <p
+          css={{
+            opacity: added ? "1" : "0",
+            color: "rgba(29, 185, 84, 0.8)",
+            fontWeight: 600,
+            transition: "all 0.1s",
+          }}
+        >
+          Boken har lagts till.
+        </p>
       </div>
     </div>
   );
