@@ -5,12 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dateToString from "../utils/dateToString";
 
 const Review = ({ userReview }) => {
-  console.log(userReview);
   const { user_name, user_img, rating, review, date } = userReview;
   function createRating() {
     let ratingArr = [];
     for (let i = 0; i < rating; i++) {
-      ratingArr.push(<FontAwesomeIcon key={`star-${i}`} icon="star" />);
+      ratingArr.push(<FontAwesomeIcon key={`star-${i}`} icon="star" css={{ color: "#ffd27d" }} />);
     }
     return ratingArr;
   }
@@ -31,7 +30,7 @@ const Review = ({ userReview }) => {
           borderBottom: "1px solid #eaeaea"
         }}
       >
-        <img src={user_img} alt={`${user_img} profile`} />
+        <img src={user_img} alt={`${user_img} profile`} css={{ width: "50px", borderRadius: "50%" }} />
         <div>
           <p>{user_name}</p>
           <p>{createRating()}</p>
@@ -43,7 +42,8 @@ const Review = ({ userReview }) => {
           margin: 0,
           padding: "20px 0",
           lineHeight: "1.6",
-          letterSpacing: "1px"
+          letterSpacing: "1px",
+          textAlign: "left"
         }}
       >
         {review}

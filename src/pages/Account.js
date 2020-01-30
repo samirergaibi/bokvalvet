@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import { Fragment, useContext, useEffect } from "react";
 import { navigate, Link } from "@reach/router";
 
-import { FirebaseContext, db } from "../components/Firebase";
+import { FirebaseContext } from "../components/Firebase";
 import bookLoverImage from "../images/book-lover.png";
 import mq from "../utils/mediaQueries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,18 +17,6 @@ const Account = () => {
     }
   }, [authRespReceived, user]);
 
-  useEffect(() => {
-    if (user) {
-      db.collection("users")
-        .where("id", "==", user.uid)
-        .get()
-        .then(querySnapShot => {
-          querySnapShot.forEach(doc => {
-            console.log(doc.data(), "DOCUMENT");
-          });
-        });
-    }
-  }, [user]);
   return (
     <Fragment>
       <h1

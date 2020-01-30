@@ -94,13 +94,13 @@ const Book = ({ id }) => {
             >
               <div>
                 <p css={{ borderBottom: "1px solid #000" }}>Publicerad</p>
-                <p css={{ fontFamily: "Lato" }}>
+                <p>
                   {dateConverter(book.publishedDate)}
                 </p>
               </div>
               <div>
                 <p css={{ borderBottom: "1px solid #000" }}>Sidor</p>
-                <p css={{ fontFamily: "Lato" }}>{book.pageCount}</p>
+                <p>{book.pageCount}</p>
               </div>
             </div>
           </div>

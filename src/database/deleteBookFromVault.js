@@ -1,7 +1,7 @@
 import { db } from "../components/Firebase";
 
 function deleteBookFromVault(userId, bookId) {
-  db.collection("vaultBooks")
+  db.collection("books")
     .where("user_id", "==", userId)
     .where("book_id", "==", bookId)
     .get()

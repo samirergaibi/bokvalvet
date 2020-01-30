@@ -19,7 +19,7 @@ const BookVault = () => {
   useEffect(() => {
     if (user) {
       const unsubscribe = db
-        .collection("vaultBooks")
+        .collection("books")
         .where("user_id", "==", user.uid)
         .orderBy("added", "asc")
         .onSnapshot(snapshot => {
