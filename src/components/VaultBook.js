@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "@reach/router";
 
 import imageNotFound from "../images/no-image-found.jpg";
-import SecondaryButton from "./SecondaryButton";
 import mq from "../utils/mediaQueries";
 
 const VaultBook = ({ book, setPopupIsVisible, setBookToRemove }) => {
@@ -66,7 +66,30 @@ const VaultBook = ({ book, setPopupIsVisible, setBookToRemove }) => {
             }
           }}
         >
-          <SecondaryButton>
+          <Link to={`/bok/${book.book_id}`} css={{
+            fontWeight: 600,
+            textDecoration: "none",
+            letterSpacing: "1px",
+            fontSize: "16px",
+            backgroundColor: "#007e8e",
+            color: "#fff",
+            border: "none",
+            borderRadius: "10px",
+            outline: "none",
+            padding: "10px 20px",
+            cursor: "pointer",
+            transition: "all 0.3s ease 0s",
+            boxShadow: "0 5px 10px rgba(0, 0, 0, 0.2)",
+            ":hover": {
+              backgroundColor: "#0dafc3",
+              transform: "translateY(-2px)",
+              boxShadow: "0 7px 10px rgba(0, 0, 0, 0.3)",
+            },
+            ":focus": {
+              transform: "translateY(2px)",
+              boxShadow: "0 3px 10px rgba(0, 0, 0, 0.2)",
+            },
+          }}>
             <FontAwesomeIcon
               icon="book-open"
               css={{
@@ -77,7 +100,19 @@ const VaultBook = ({ book, setPopupIsVisible, setBookToRemove }) => {
               }}
             />
             Mer
-          </SecondaryButton>
+          </Link>
+          {/* <SecondaryButton>
+            <FontAwesomeIcon
+              icon="book-open"
+              css={{
+                color: "#fff",
+                fontSize: "17px",
+                position: "relative",
+                top: "1px"
+              }}
+            />
+            Mer
+          </SecondaryButton> */}
           <button
             onClick={() => {
               setPopupIsVisible(true);

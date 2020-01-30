@@ -53,6 +53,12 @@ const BookVault = () => {
           margin: "0 auto",
           lineHeight: "1.6",
           letterSpacing: "1px",
+          [mq[0]]: {
+            width: "70vw"
+          },
+          [mq[1]]: {
+            width: "50vw"
+          },
           [mq[3]]: {
             width: "40vw",
             marginBottom: "2vh"
@@ -74,7 +80,8 @@ const BookVault = () => {
         />
         <p css={{ marginTop: 0 }}>
           Ditt personliga bokvalv är en digital bokhylla där du inte enbart kan
-          förvara din böcker, utan även skriva egna sammanfattningar.
+          förvara din böcker, utan även skriva egna summeringar samt läsa
+          andras recensioner.
           <br />
           <br />
           Sätt igång direkt och ha allt samlat på en och samma plats.

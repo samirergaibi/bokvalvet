@@ -36,7 +36,10 @@ const SignUp = () => {
           display: "block",
           margin: "20px auto",
           textAlign: "center",
-          textDecoration: "none"
+          textDecoration: "none",
+          ":hover": {
+            textDecoration: "underline"
+          }
         }}>Glömt lösenord?</Link>
       </Fragment>
     )

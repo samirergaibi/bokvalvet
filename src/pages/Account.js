@@ -56,10 +56,10 @@ const Account = () => {
               borderRadius: "50%",
               width: "128px",
               [mq[2]]: {
-                width: "15vw"
+                width: "10vw"
               },
               [mq[5]]: {
-                width: "12vw"
+                width: "10vw"
               }
             }}
           />
@@ -105,7 +105,10 @@ const Account = () => {
                 textDecoration: "none",
                 display: "inline-block",
                 marginTop: "20px",
-                color: "#1a73e8"
+                color: "#1a73e8",
+                ":hover": {
+                  textDecoration: "underline"
+                }
               }}
             >
               Gå till ditt bokvalv
