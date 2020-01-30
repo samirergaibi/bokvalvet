@@ -34,7 +34,7 @@ const SignInForm = () => {
         .auth()
         .signInWithEmailAndPassword(emailInput, passwordInput)
         .then(resp => {
-          navigate("/mitt-konto");
+          navigate("/konto");
         })
         .catch(err => {
           console.log(err);

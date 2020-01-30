@@ -12,7 +12,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (authRespReceived && user) {
-      navigate("/mitt-konto");
+      navigate("/konto");
     }
   }, [authRespReceived, user]);
 
@@ -36,7 +36,10 @@ const SignUp = () => {
           display: "block",
           margin: "20px auto",
           textAlign: "center",
-          textDecoration: "none"
+          textDecoration: "none",
+          ":hover": {
+            textDecoration: "underline"
+          }
         }}>Glömt lösenord?</Link>
       </Fragment>
     )

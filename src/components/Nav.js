@@ -81,13 +81,14 @@ const Nav = ({ isClosed, setIsClosed }) => {
           {
             authRespReceived ? user ? (
               <Fragment>
-                <Link onClick={() => { setIsClosed(!isClosed) }} to="/mitt-konto">Konto</Link>
+                <Link onClick={() => { setIsClosed(!isClosed) }} to="/konto">Konto</Link>
+                <Link onClick={() => { setIsClosed(!isClosed) }} to="/bokvalv">Bokvalv</Link>
                 <Link onClick={() => { setIsClosed(!isClosed); firebase.auth().signOut(); }} to="/logga-in">Logga ut</Link>
               </Fragment>
               ) : (
                 <Fragment>
                   <Link onClick={() => { setIsClosed(!isClosed) }} to="/skapa-konto">Skapa konto</Link>
-                  <Link onClick={() => { setIsClosed(!isClosed) }} to="/logga-in">Logga in</Link>        
+                  <Link onClick={() => { setIsClosed(!isClosed) }} to="/logga-in">Logga in</Link>
                 </Fragment>
             ) : null
           }

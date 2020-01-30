@@ -15,6 +15,5 @@ const firebaseConfig = {
 };
 
 // Initialize firebase with config
-console.log("FIREBASE HAS BEEN INITIALIZED")
 firebase.initializeApp(firebaseConfig);
 export default firebase;

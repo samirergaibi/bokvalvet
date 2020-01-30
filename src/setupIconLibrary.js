@@ -1,11 +1,14 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faBook,
   faFeatherAlt,
-  faTags
+  faTags,
+  faTrashAlt,
+  faBookOpen,
+  faArrowRight,
+  faTimes,
+  faStar
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  faCalendarAlt
 } from "@fortawesome/free-regular-svg-icons";
 
-library.add(faBook, faCalendarAlt, faFeatherAlt, faTags);
+library.add(faFeatherAlt, faTags, faTrashAlt, faBookOpen, faArrowRight, faTimes, faStar);
