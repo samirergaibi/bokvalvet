@@ -5,7 +5,12 @@ import { useRef } from "react";
 
 import mq from "../utils/mediaQueries";
 
-const ConfirmPopup = ({ visible, setVisible, deleteBook, bookToRemove }) => {
+const ConfirmPopup = ({
+  visible,
+  setVisible,
+  deleteFunc,
+  msg = "Are you sure?"
+}) => {
   const popupRef = useRef();
   const closeRef = useRef();
 
@@ -14,7 +19,6 @@ const ConfirmPopup = ({ visible, setVisible, deleteBook, bookToRemove }) => {
       setVisible(false);
     }
   }
-
   const buttonStyle = {
     border: "none",
     padding: "15px 30px",
@@ -88,7 +92,7 @@ const ConfirmPopup = ({ visible, setVisible, deleteBook, bookToRemove }) => {
         >
           <FontAwesomeIcon icon="times" css={{ fontSize: "24px" }} />
         </button>
-        <p>Är du säker på att du vill ta bort boken från din lista?</p>
+        <p>{msg}</p>
         <div
           css={{
             display: "flex",
@@ -101,7 +105,7 @@ const ConfirmPopup = ({ visible, setVisible, deleteBook, bookToRemove }) => {
         >
           <button
             onClick={() => {
-              deleteBook(bookToRemove);
+              deleteFunc();
               setVisible(false);
             }}
             css={{ ...buttonStyle, backgroundColor: "#e02424" }}

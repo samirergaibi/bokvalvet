@@ -34,17 +34,13 @@ const BookVault = () => {
     }
   }, [user]);
 
-  function deleteBook(id) {
-    deleteBookFromVault(user.uid, id);
-  }
-
   return (
     <Fragment>
       <ConfirmPopup
         visible={popupIsVisible}
         setVisible={setPopupIsVisible}
-        deleteBook={deleteBook}
-        bookToRemove={bookToRemove}
+        deleteFunc={() => { deleteBookFromVault(user.uid, bookToRemove) }}
+        msg="Är du säker på att du vill ta bort boken från din lista?"
       />
       <div
         css={{

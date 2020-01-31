@@ -6,9 +6,25 @@ import {
   faBookOpen,
   faArrowRight,
   faTimes,
-  faStar
+  faStar,
+  faChevronDown,
+  faChevronUp
 } from "@fortawesome/free-solid-svg-icons";
 import {
+  faTrashAlt as bin,
+  faEdit as edit
 } from "@fortawesome/free-regular-svg-icons";
 
-library.add(faFeatherAlt, faTags, faTrashAlt, faBookOpen, faArrowRight, faTimes, faStar);
+library.add(
+  faFeatherAlt,
+  faTags,
+  faTrashAlt,
+  faBookOpen,
+  faArrowRight,
+  faTimes,
+  faStar,
+  bin,
+  edit,
+  faChevronDown,
+  faChevronUp
+);

@@ -9,8 +9,6 @@ function addReview(bookId, rating, review, userId, userImg, userName){
     user_id: userId,
     user_img: userImg,
     user_name: userName
-  }).then(docRef => {
-    console.log("Document created: ", docRef);
   }).catch(err => {
     console.log("Error adding document: ", err);
   })
