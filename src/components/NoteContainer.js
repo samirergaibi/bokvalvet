@@ -7,7 +7,7 @@ import { db, FirebaseContext } from "./Firebase";
 import NoteDisplayed from "./NoteDisplayed";
 import NoteCreator from "./NoteCreator";
 
-const NoteContainer = ({ bookId }) => {
+const NoteContainer = ({ bookId, bookRef }) => {
   const { user } = useContext(FirebaseContext);
   const [visible, setVisible] = useState(false);
   const [note, setNote] = useState();
@@ -29,7 +29,7 @@ const NoteContainer = ({ bookId }) => {
   }, [bookId, user.uid]);
 
   function editNote() {
-    setEditingValue(note.note);
+    setEditingValue(note);
     setNote(null);
   }
   return (
@@ -48,7 +48,8 @@ const NoteContainer = ({ bookId }) => {
           fontSize: "16px",
           fontFamily: "'Raleway'",
           outline: "none",
-          marginBottom: "10px"
+          marginBottom: "10px",
+          cursor: "pointer"
         }}
       >
         {note ? "Se Notering" : "Skriv Notering"}
@@ -59,7 +60,7 @@ const NoteContainer = ({ bookId }) => {
             position: "relative",
             top: "2px",
             transition: "all 0.4s",
-            transform: visible ? "rotate(0deg)" : "rotate(180deg)",
+            transform: visible ? "rotate(0deg)" : "rotate(180deg)"
           }}
         />
       </button>
@@ -76,6 +77,7 @@ const NoteContainer = ({ bookId }) => {
             setNote={setNote}
             editNote={editNote}
             setNoteVisible={setVisible}
+            bookRef={bookRef}
           />
         ) : (
           <NoteCreator
@@ -83,6 +85,7 @@ const NoteContainer = ({ bookId }) => {
             bookId={bookId}
             editingValue={editingValue}
             setEditingValue={setEditingValue}
+            setNote={setNote}
           />
         )}
       </div>

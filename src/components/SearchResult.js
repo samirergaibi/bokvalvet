@@ -31,6 +31,9 @@ const SearchResult = ({ result }) => {
           <Fragment key={book.id}>
             <div css={{
               margin: "10vh auto",
+              ":first-of-type": {
+                margin: "0 auto"
+              },
               [mq[2]]: {
                 margin: "0",
                 width: "100%",

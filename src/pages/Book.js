@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { getBook } from "../api/api";
 import dateConverter from "../utils/dateConverter";
-import noImageFound from "../images/no-image-found.jpg";
+import noCover from "../images/no-cover-2.jpg";
 import mq from "../utils/mediaQueries";
 import ReviewsContainer from "../components/ReviewsContainer";
 
@@ -45,7 +45,7 @@ const Book = ({ id }) => {
           {book.imageLinks ? (
             <img src={book.imageLinks.thumbnail} alt={`${book.title}`} />
           ) : (
-            <img src={noImageFound} alt={`${book.title}`} />
+            <img src={noCover} alt={`${book.title}`} css={{ maxHeight: "30vh" }} />
           )}
           <div>
             <div

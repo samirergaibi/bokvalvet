@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import SecondaryButton from "./SecondaryButton";
 import mq from "../utils/mediaQueries";
 import { FirebaseContext } from "./Firebase";
-import noImageFound from "../images/no-image-found.jpg";
+import noCoverImage from "../images/no-cover-2.jpg";
 import addBookToVault from "../database/addBookToVault";
 
 const BookCard = ({ book: bookInfo }) => {
@@ -90,10 +90,10 @@ const BookCard = ({ book: bookInfo }) => {
           <img src={book.imageLinks.thumbnail} alt={`${book.title}`} />
         ) : (
           <img
-            src={noImageFound}
+            src={noCoverImage}
             alt={`${book.title}`}
             css={{
-              width: "210px"
+              maxHeight: "200px"
             }}
           />
         )}

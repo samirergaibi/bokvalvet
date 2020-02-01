@@ -6,8 +6,9 @@ import { Fragment, useState } from "react";
 import dateToString from "../utils/dateToString";
 import ConfirmPopup from "./ConfirmPopup";
 import deleteNote from "../database/deleteNote";
+import mq from "../utils/mediaQueries";
 
-const NoteDisplayed = ({ note, editNote, setNoteVisible }) => {
+const NoteDisplayed = ({ note, editNote, setNoteVisible, bookRef }) => {
   const [visible, setVisible] = useState(false);
   return (
     <Fragment>
@@ -26,14 +27,21 @@ const NoteDisplayed = ({ note, editNote, setNoteVisible }) => {
           width: "90%",
           boxShadow:
             "0 1px 1px rgba(0,0,0,0.11), 0 2px 2px rgba(0,0,0,0.11), 0 4px 4px rgba(0,0,0,0.11), 0 6px 8px rgba(0,0,0,0.11), 0 8px 16px rgba(0,0,0,0.11)",
-          padding: "40px 10px 20px 10px",
+          padding: "40px 15px 20px 15px",
           margin: "20px auto",
           borderRadius: "10px",
           letterSpacing: "1px",
-          lineHeight: "1.6"
+          lineHeight: "1.6",
+          [mq[0]]: {
+            width: "50%"
+          },
+          [mq[3]]: {
+            width: "35%",
+            padding: "40px 40px 20px 40px"
+          }
         }}
       >
-        <time css={{ position: "absolute", top: "10px", right: "10px" }}>
+        <time css={{ position: "absolute", top: "10px", right: "10px", fontSize: "13px", fontStyle: "italic" }}>
           {dateToString(note.date.toDate())}
         </time>
         <p>{note.note}</p>
@@ -46,9 +54,10 @@ const NoteDisplayed = ({ note, editNote, setNoteVisible }) => {
               border: "none",
               outline: "none",
               backgroundColor: "transparent",
-              fontSize: "16px",
+              fontSize: "13px",
               fontFamily: "'Raleway'",
-              padding: "0 20px"
+              padding: "0 20px",
+              cursor: "pointer"
             },
             "& svg": {
               marginRight: "5px"
@@ -63,7 +72,7 @@ const NoteDisplayed = ({ note, editNote, setNoteVisible }) => {
             <FontAwesomeIcon icon={["far", "trash-alt"]} />
             Ta bort
           </button>
-          <button onClick={editNote}>
+          <button onClick={() => { editNote(); bookRef.current.scrollIntoView(); }}>
             <FontAwesomeIcon icon={["far", "edit"]} />
             Redigera
           </button>

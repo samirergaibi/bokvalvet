@@ -2,14 +2,16 @@
 import { jsx } from "@emotion/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "@reach/router";
+import { useRef } from "react";
 
-import imageNotFound from "../images/no-image-found.jpg";
+import noCoverImage from "../images/no-cover-2.jpg";
 import mq from "../utils/mediaQueries";
 import NoteContainer from "./NoteContainer";
 
 const VaultBook = ({ book, setPopupIsVisible, setBookToRemove }) => {
+  const bookRef = useRef();
   return (
-    <div>
+    <div ref={bookRef}>
       <div
         key={book.book_id}
         css={{
@@ -43,7 +45,7 @@ const VaultBook = ({ book, setPopupIsVisible, setBookToRemove }) => {
         {book.image_url ? (
           <img src={book.image_url} alt={book.title} />
         ) : (
-          <img src={imageNotFound} alt={book.title} />
+          <img src={noCoverImage} alt={book.title} />
         )}
         <div
           css={{
@@ -139,7 +141,7 @@ const VaultBook = ({ book, setPopupIsVisible, setBookToRemove }) => {
           </div>
         </div>
       </div>
-      <NoteContainer bookId={book.book_id} />
+      <NoteContainer bookId={book.book_id} bookRef={bookRef}/>
     </div>
   );
 };

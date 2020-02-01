@@ -19,16 +19,6 @@ const Account = () => {
 
   return (
     <Fragment>
-      <h1
-        css={{
-          textAlign: "center",
-          [mq[3]]: {
-            fontSize: "2.5em"
-          }
-        }}
-      >
-        Välkommen
-      </h1>
       {user && user.displayName ? (
         <div
           css={{
@@ -36,7 +26,7 @@ const Account = () => {
             letterSpacing: "1px"
           }}
         >
-          <h2 css={{ [mq[3]]: { fontSize: "1.5em" } }}>{user.displayName}</h2>
+          <h1>{user.displayName}</h1>
           <img
             src={user.photoURL}
             alt={`${user.displayName}-initials`}
@@ -62,6 +52,11 @@ const Account = () => {
               [mq[2]]: {
                 width: "60vw",
                 marginTop: "10vh"
+              },
+              [mq[3]]: {
+                marginTop: "5vh",
+                width: "55vw",
+                padding: "30px 15px"
               }
             }}
           >
