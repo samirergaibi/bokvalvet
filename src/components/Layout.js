@@ -37,7 +37,7 @@ const Layout = ({ children }) => {
         </div>
         <Nav isClosed={isClosed} setIsClosed={setIsClosed} />
       </header>
-      <main css={{ marginTop: "15vh" }}>{children}</main>
+      <main css={{ margin: "15vh auto 5vh" }}>{children}</main>
       <footer></footer>
     </Fragment>
   );

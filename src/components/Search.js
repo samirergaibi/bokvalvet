@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Fragment, useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SearchForm from "../components/SearchForm";
 import SearchResult from "../components/SearchResult";
@@ -25,6 +26,11 @@ const Search = () => {
     }
   }, []);
 
+  function clearHistory() {
+    localStorage.clear();
+    setSearchResult(null);
+  }
+
   function loadMore() {
     searchForBook(searchTerm, startIndex, amountToLoad).then(resp => {
       let previousAndNewResults;
@@ -48,7 +54,6 @@ const Search = () => {
     });
     setStartIndex(prev => prev + amountToLoad);
   }
-
   return (
     <Fragment>
       <div
@@ -57,23 +62,28 @@ const Search = () => {
           margin: "0 auto 5vh auto",
           [mq[2]]: {
             width: "30vw"
-          },
-          "& button": {
-            width: "40vw",
-            marginLeft: "auto",
-            marginRight: "auto",
-            [mq[2]]: {
-              width: "10vw"
-            }
           }
         }}
       >
-        <SearchForm
-          setSearchResult={setSearchResult}
-          setStartIndex={setStartIndex}
-          setSearchTerm={setSearchTerm}
-          amountToLoad={amountToLoad}
-        />
+        <div
+          css={{
+            "& button": {
+              width: "40vw",
+              marginLeft: "auto",
+              marginRight: "auto",
+              [mq[2]]: {
+                width: "10vw"
+              }
+            }
+          }}
+        >
+          <SearchForm
+            setSearchResult={setSearchResult}
+            setStartIndex={setStartIndex}
+            setSearchTerm={setSearchTerm}
+            amountToLoad={amountToLoad}
+          />
+        </div>
         {searchTerm && searchResult && (
           <p
             css={{
@@ -85,9 +95,30 @@ const Search = () => {
             "{searchTerm}" genererade {searchResult.totalItems} resultat.
           </p>
         )}
+        {searchResult && searchResult.totalItems > 0 && (
+          <button
+            onClick={clearHistory}
+            css={{
+              backgroundColor: "transparent",
+              fontFamily: "'Raleway'",
+              outline: "none",
+              border: "none",
+              fontSize: "12px",
+              cursor: "pointer",
+              width: "100%",
+              margin: "0 auto",
+              "& svg": {
+                marginRight: "3px"
+              }
+            }}
+          >
+            <FontAwesomeIcon icon={["far", "trash-alt"]} />
+            Rensa historik
+          </button>
+        )}
       </div>
       <div>
-        {searchResult && (
+        {searchResult && searchResult.totalItems > 0 && (
           <div
             css={{
               width: "80vw",

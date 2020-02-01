@@ -2,11 +2,11 @@
 import { jsx } from "@emotion/core";
 
 
-const PrimaryButton = ({ children, type="button", onClick }) => {
+const PrimaryButton = (props) => {
+  const { children } = props;
   return (
     <button
-    onClick={onClick}
-    type={type}
+    {...props}
     css={{
       fontWeight: 600,
       fontSize: "16px",
