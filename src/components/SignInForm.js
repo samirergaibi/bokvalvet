@@ -34,7 +34,7 @@ const SignInForm = () => {
         .auth()
         .signInWithEmailAndPassword(emailInput, passwordInput)
         .then(resp => {
-          navigate("/konto");
+          navigate("/verifiera-epost-adress");
         })
         .catch(err => {
           console.log(err);

@@ -13,6 +13,7 @@ import Layout from "./Layout";
 import Account from "../pages/Account";
 import Book from "../pages/Book";
 import BookVault from "../pages/BookVault";
+import VerifyEmail from "../pages/VerifyEmail";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,6 +37,7 @@ function App() {
           <Account path="/konto" />
           <Book path="/bok/:id" />
           <BookVault path="/bokvalv" />
+          <VerifyEmail path="/verifiera-epost-adress" />
         </Router>
       </Layout>
     </FirebaseContext.Provider>

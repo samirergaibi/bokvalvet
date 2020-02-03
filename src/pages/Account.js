@@ -14,12 +14,14 @@ const Account = () => {
   useEffect(() => {
     if (authRespReceived && !user) {
       navigate("/");
+    } else if (authRespReceived && !user.emailVerified) {
+      navigate("/verifiera-epost-adress");
     }
   }, [authRespReceived, user]);
 
   return (
     <Fragment>
-      {user && user.displayName ? (
+      {user && user.emailVerified && (
         <div
           css={{
             textAlign: "center",
@@ -102,8 +104,6 @@ const Account = () => {
             </Link>
           </div>
         </div>
-      ) : (
-        <p>Loading...</p>
       )}
     </Fragment>
   );
