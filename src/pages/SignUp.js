@@ -31,16 +31,14 @@ const SignUp = () => {
           }}
         >
           <SignUpForm />
+          <p css={{ textAlign: "center" }}>Har du redan ett konto? <Link to="/logga-in" css={{
+            color: "#1a73e8",
+            textDecoration: "none",
+            ":hover": {
+              textDecoration: "underline"
+            }
+          }}>logga in.</Link></p>
         </div>
-        <Link to="aterstall-losenord" css={{
-          display: "block",
-          margin: "20px auto",
-          textAlign: "center",
-          textDecoration: "none",
-          ":hover": {
-            textDecoration: "underline"
-          }
-        }}>Glömt lösenord?</Link>
       </Fragment>
     )
   );

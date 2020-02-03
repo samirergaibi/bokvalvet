@@ -55,6 +55,10 @@ const SignUpForm = () => {
         .createUserWithEmailAndPassword(emailInput, passwordInput)
         .then(() => {
           const user = firebase.auth().currentUser;
+          const actionCodeSettings = {
+            url: `https://bokvalvet.se/konto`
+          };
+          user.sendEmailVerification(actionCodeSettings);
           if (user) {
             const colors = [
               "1abc9c",

@@ -85,15 +85,34 @@ const Search = () => {
           />
         </div>
         {searchTerm && searchResult && (
-          <p
+          <div
             css={{
               textAlign: "center",
               fontSize: "14px",
               marginTop: "8px"
             }}
           >
-            "{searchTerm}" genererade {searchResult.totalItems} resultat.
-          </p>
+            <p>
+              "{searchTerm}" genererade {searchResult.totalItems} resultat.
+            </p>
+            <p>
+              Hittar du inte din bok? Sök på bokens{" "}
+              <a
+                href={`https://www.google.com/search?q=${searchTerm.split(" ").join("+")}+engelska`}
+                rel="noopener noreferrer"
+                target="_blank"
+                css={{
+                  color: "#1a73e8",
+                  textDecoration: "none",
+                  ":hover": {
+                    textDecoration: "underline"
+                  }
+                }}
+              >
+                engelska namn.
+              </a>
+            </p>
+          </div>
         )}
         {searchResult && searchResult.totalItems > 0 && (
           <button
@@ -113,7 +132,7 @@ const Search = () => {
             }}
           >
             <FontAwesomeIcon icon={["far", "trash-alt"]} />
-            Rensa historik
+            Rensa sökresultat
           </button>
         )}
       </div>
