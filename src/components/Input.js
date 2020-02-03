@@ -1,13 +1,10 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 
-const Input = ({ type, value, onChange, placeholder }) => {
+const Input = (props) => {
   return (
     <input
-      type={type}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
+      {...props}
       css={{
         position: "relative",
         display: "block",
