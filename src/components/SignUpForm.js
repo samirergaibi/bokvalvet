@@ -56,7 +56,7 @@ const SignUpForm = () => {
         .then(() => {
           const user = firebase.auth().currentUser;
           const actionCodeSettings = {
-            url: `http://localhost:3000/konto`
+            url: `https://bokvalvet.se/konto`
           };
           user.sendEmailVerification(actionCodeSettings);
           if (user) {

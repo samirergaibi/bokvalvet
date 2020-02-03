@@ -38,7 +38,7 @@ const VerifyEmail = () => {
           onClick={() => {
             setEmailSent(true);
             const actionCodeSettings = {
-              url: `http://localhost:3000/konto`
+              url: `https://bokvalvet.se/konto`
             };
             firebase.auth().currentUser.sendEmailVerification(actionCodeSettings);
           }}
