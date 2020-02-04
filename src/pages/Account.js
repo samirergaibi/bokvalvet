@@ -1,15 +1,18 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Fragment, useContext, useEffect } from "react";
-import { navigate, Link } from "@reach/router";
+import { Fragment, useContext, useEffect, useState } from "react";
+import { navigate } from "@reach/router";
 
 import { FirebaseContext } from "../components/Firebase";
-import bookLoverImage from "../images/book-lover.png";
 import mq from "../utils/mediaQueries";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import UpdateProfile from "../components/UpdateProfile";
+import UpdatePassword from "../components/UpdatePassword";
+import BookVaultBox from "../components/BookVaultBox";
 
 const Account = () => {
   const { authRespReceived, user } = useContext(FirebaseContext);
+  const [rerender, setRerender] = useState(false);
+  const [provider, setProvider] = useState();
 
   useEffect(() => {
     if (authRespReceived && !user) {
@@ -18,6 +21,15 @@ const Account = () => {
       navigate("/verifiera-epost-adress");
     }
   }, [authRespReceived, user]);
+
+  useEffect(() => {
+    const userProvider =
+      user &&
+      user.providerData &&
+      user.providerData[0] &&
+      user.providerData[0].providerId;
+    setProvider(userProvider);
+  }, [user]);
 
   return (
     <Fragment>
@@ -43,66 +55,49 @@ const Account = () => {
               }
             }}
           />
-          <div
+          <section
             css={{
-              boxShadow:
-                "0 1px 1px rgba(0,0,0,0.11), 0 2px 2px rgba(0,0,0,0.11), 0 4px 4px rgba(0,0,0,0.11), 0 6px 8px rgba(0,0,0,0.11), 0 8px 16px rgba(0,0,0,0.11)",
-              borderRadius: "10px",
               width: "90vw",
-              margin: "40px auto",
-              padding: "40px 20px",
-              [mq[2]]: {
-                width: "60vw",
-                marginTop: "10vh"
+              margin: "5vh auto",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              [mq[0]]: {
+                width: "70vw"
               },
-              [mq[3]]: {
-                marginTop: "5vh",
-                width: "55vw",
-                padding: "30px 15px"
+              [mq[2]]: {
+                gridTemplateColumns: "1fr 1fr",
+                gridGap: "50px"
+              },
+              [mq[5]]: {
+                width: "50vw"
+              },
+              "& > hr": {
+                [mq[2]]: {
+                  display: "none"
+                }
+              },
+              "& > div:nth-of-type(1)": {
+                [mq[2]]: {
+                  gridColumn: "1/3"
+                }
+              },
+              "& > div:nth-of-type(3)": {
+                [mq[2]]: {
+                  height: "fit-content"
+                }
               }
             }}
           >
-            <div
-              css={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center"
-              }}
-            >
-              <div>
-                <h3>Ditt bokvalv</h3>
-                <p>Ett centralt ställe för dina lästa böcker.</p>
-              </div>
-              <img
-                src={bookLoverImage}
-                alt="book-vault"
-                css={{
-                  width: "120px",
-                  [mq[2]]: {
-                    width: "20vw"
-                  }
-                }}
-              />
-            </div>
-            <Link
-              to="/bokvalv"
-              css={{
-                textDecoration: "none",
-                display: "inline-block",
-                marginTop: "20px",
-                color: "#1a73e8",
-                ":hover": {
-                  textDecoration: "underline"
-                }
-              }}
-            >
-              Gå till ditt bokvalv
-              <FontAwesomeIcon
-                icon="arrow-right"
-                css={{ position: "relative", top: "1px", left: "3px" }}
-              />
-            </Link>
-          </div>
+            <BookVaultBox />
+            {provider === "password" && (
+              <Fragment>
+                <hr css={{ width: "40vw", margin: "50px auto" }} />
+                <UpdatePassword />
+                <hr css={{ width: "40vw", margin: "50px auto" }} />
+                <UpdateProfile rerender={rerender} setRerender={setRerender} />
+              </Fragment>
+            )}
+          </section>
         </div>
       )}
     </Fragment>
