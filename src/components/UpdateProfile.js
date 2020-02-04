@@ -5,36 +5,42 @@ import { useState } from "react";
 import firebase from "./Firebase";
 import Input from "../components/Input";
 import PrimaryButton from "../components/PrimaryButton";
+import ErrorMsg from "./ErrorMsg";
 
 const UpdateProfile = ({ rerender, setRerender }) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   function updateProfile(e) {
     e.preventDefault();
-    const colors = [
-      "1abc9c",
-      "f1c40f",
-      "2980b9",
-      "8e44ad",
-      "d870ad",
-      "b49255",
-      "f39c12"
-    ];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    firebase
-      .auth()
-      .currentUser.updateProfile({
-        displayName: `${firstname} ${lastname}`,
-        photoURL: `https://eu.ui-avatars.com/api/?name=${firstname}+${lastname}&background=${randomColor}&color=fff&rounded=true&size=300`
-      })
-      .then(() => {
-        setRerender(!rerender);
-        setFirstname("");
-        setLastname("");
-      })
-      .catch(err => {
-        console.log("Problem updating profile: ", err);
-      });
+    if (firstname.length > 0 && lastname.length > 0) {
+      const colors = [
+        "1abc9c",
+        "f1c40f",
+        "2980b9",
+        "8e44ad",
+        "d870ad",
+        "b49255",
+        "f39c12"
+      ];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      firebase
+        .auth()
+        .currentUser.updateProfile({
+          displayName: `${firstname} ${lastname}`,
+          photoURL: `https://eu.ui-avatars.com/api/?name=${firstname}+${lastname}&background=${randomColor}&color=fff&rounded=true&size=300`
+        })
+        .then(() => {
+          setRerender(!rerender);
+          setFirstname("");
+          setLastname("");
+        })
+        .catch(err => {
+          console.log("Problem updating profile: ", err);
+        });
+    } else {
+      setErrorMsg("Please fill out both the fields");
+    }
   }
   return (
     <div
@@ -73,6 +79,7 @@ const UpdateProfile = ({ rerender, setRerender }) => {
           <PrimaryButton type="submit">Spara</PrimaryButton>
         </form>
       </div>
+      <ErrorMsg msg={errorMsg} />
     </div>
   );
 };

@@ -26,9 +26,9 @@ const SearchResult = ({ result }) => {
         }
       }}
     >
-      {books.map(book => {
+      {books.map((book, i) => {
         return (
-          <Fragment key={book.id}>
+          <Fragment key={`${book.id}-${i}`}>
             <div css={{
               margin: "10vh auto",
               ":first-of-type": {

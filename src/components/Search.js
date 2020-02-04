@@ -96,9 +96,9 @@ const Search = () => {
               "{searchTerm}" genererade {searchResult.totalItems} resultat.
             </p>
             <p>
-              Hittar du inte din bok? Sök på bokens{" "}
+              Hittar du inte din bok? Sök på{" "}
               <a
-                href={`https://www.google.com/search?q=${searchTerm.split(" ").join("+")}+engelska`}
+                href={`https://www.google.com/search?q=${searchTerm.split(" ").join("+")}+bok+engelska`}
                 rel="noopener noreferrer"
                 target="_blank"
                 css={{
@@ -109,7 +109,7 @@ const Search = () => {
                   }
                 }}
               >
-                engelska namn.
+               bokens engelska namn.
               </a>
             </p>
           </div>
@@ -128,6 +128,9 @@ const Search = () => {
               margin: "0 auto",
               "& svg": {
                 marginRight: "3px"
+              },
+              ":hover": {
+                textDecoration: "underline"
               }
             }}
           >

@@ -26,7 +26,7 @@ const SecondaryButton = (props) => {
           transform: "translateY(-2px)",
           boxShadow: "0 7px 10px rgba(0, 0, 0, 0.3)",
         },
-        ":focus": {
+        ":active": {
           transform: "translateY(2px)",
           boxShadow: "0 3px 10px rgba(0, 0, 0, 0.2)",
         },
