@@ -26,7 +26,8 @@ const PrimaryButton = (props) => {
         transform: "translateY(-2px)",
         boxShadow: "0 7px 10px rgba(0, 0, 0, 0.3)",
       },
-      ":focus": {
+      ":active": {
+        backgroundColor: "#1DB954",
         transform: "translateY(2px)",
         boxShadow: "0 3px 10px rgba(0, 0, 0, 0.3)",
       }
