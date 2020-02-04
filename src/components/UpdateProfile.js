@@ -1,16 +1,15 @@
 /** @jsx jsx  */
 import { jsx } from "@emotion/core";
-import { useState, useContext } from "react";
+import { useState } from "react";
 
-import firebase, { FirebaseContext} from "./Firebase";
+import firebase from "./Firebase";
 import Input from "../components/Input";
 import PrimaryButton from "../components/PrimaryButton";
 
 const UpdateProfile = ({ rerender, setRerender }) => {
-  const { user } = useContext(FirebaseContext);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  function updateProfile(e){
+  function updateProfile(e) {
     e.preventDefault();
     const colors = [
       "1abc9c",
@@ -22,31 +21,31 @@ const UpdateProfile = ({ rerender, setRerender }) => {
       "f39c12"
     ];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    if(user.providerData && user.providerData[0] && user.providerData[0].providerId === "password"){
-      firebase.auth().currentUser.updateProfile({
+    firebase
+      .auth()
+      .currentUser.updateProfile({
         displayName: `${firstname} ${lastname}`,
         photoURL: `https://eu.ui-avatars.com/api/?name=${firstname}+${lastname}&background=${randomColor}&color=fff&rounded=true&size=300`
-      }).then(() => {
+      })
+      .then(() => {
         setRerender(!rerender);
         setFirstname("");
         setLastname("");
-      }).catch(err => {
+      })
+      .catch(err => {
         console.log("Problem updating profile: ", err);
-      })
-    } else {
-      firebase.auth().currentUser.updateProfile({
-        displayName: `${firstname} ${lastname}`
-      }).then(() => {
-        setFirstname("");
-        setLastname("");
-      }).catch(err => {
-        console.log("Problem updated profile: ", err);
-      })
-    }
-  };
+      });
+  }
   return (
-    <div>
-      <h3>Profilinställningar</h3>
+    <div
+      css={{
+        boxShadow:
+          "0 1px 1px rgba(0,0,0,0.11), 0 2px 2px rgba(0,0,0,0.11), 0 4px 4px rgba(0,0,0,0.11), 0 6px 8px rgba(0,0,0,0.11), 0 8px 16px rgba(0,0,0,0.11)",
+        borderRadius: "10px",
+        padding: "20px"
+      }}
+    >
+      <h3>Uppdatera profil</h3>
       <div
         css={{
           display: "flex",

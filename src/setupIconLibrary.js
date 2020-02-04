@@ -8,7 +8,7 @@ import {
   faTimes,
   faStar,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faTrashAlt as bin,
@@ -26,5 +26,5 @@ library.add(
   bin,
   edit,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
 );

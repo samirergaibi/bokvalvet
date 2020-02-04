@@ -15,7 +15,6 @@ import Book from "../pages/Book";
 import BookVault from "../pages/BookVault";
 import VerifyEmail from "../pages/VerifyEmail";
 import ForgotPassword from "../pages/ForgotPassword";
-import AccountSettings from "../pages/AccountSettings";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -41,7 +40,6 @@ function App() {
           <BookVault path="/bokvalv" />
           <VerifyEmail path="/verifiera-epost-adress" />
           <ForgotPassword path="/glomt-losenord" />
-          <AccountSettings path="/installningar" />
         </Router>
       </Layout>
     </FirebaseContext.Provider>

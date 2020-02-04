@@ -1,10 +1,12 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 
-const ErrorMsg = ({ msg }) => {
+const ErrorMsg = (props) => {
+  const { msg } = props;
   return (
     msg ? (
       <p
+        {...props}
         css={{
           textAlign: "center",
           backgroundColor: "#fee9ed",
