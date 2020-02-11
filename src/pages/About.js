@@ -22,7 +22,8 @@ const About = () => {
         padding: "30px",
         [mq[2]]: {
           display: "flex",
-          width: "70vw"
+          width: "70vw",
+          margin: "10vh auto"
         },
       }}>
         <div css={{

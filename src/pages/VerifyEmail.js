@@ -36,11 +36,15 @@ const VerifyEmail = () => {
         </p>
         <PrimaryButton
           onClick={() => {
-            setEmailSent(true);
             const actionCodeSettings = {
               url: `https://bokvalvet.se/konto`
             };
-            firebase.auth().currentUser.sendEmailVerification(actionCodeSettings);
+            firebase.auth().currentUser.sendEmailVerification(actionCodeSettings).then(() => {
+              setEmailSent(true);
+              console.log("Email sent.");
+            }).catch(err => {
+              console.log("Error sending email verification: ", err);
+            })
           }}
         >
           Skicka ett nytt verifikationsmail

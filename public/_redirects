@@ -1,1 +1,4 @@
+# Makes refreshing site possible
 /*    /index.html   200
+# redirect netlify url to primary url
+https://bokvalvet.netlify.com/* https://www.bokvalvet.se/:splat 301!
