@@ -78,7 +78,6 @@ const SignInForm = () => {
         value={emailInput}
         onChange={handleEmail}
         placeholder="E-postadress"
-        autocomplete="on"
       />
       <Input
         type="password"

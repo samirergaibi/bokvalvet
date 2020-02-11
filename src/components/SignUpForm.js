@@ -58,7 +58,11 @@ const SignUpForm = () => {
           const actionCodeSettings = {
             url: `https://bokvalvet.se/konto`
           };
-          user.sendEmailVerification(actionCodeSettings);
+          user.sendEmailVerification(actionCodeSettings).then(() => {
+            console.log("Email sent.");
+          }).catch(err => {
+            console.log("Error sending email verification: ", err);
+          })
           if (user) {
             const colors = [
               "1abc9c",

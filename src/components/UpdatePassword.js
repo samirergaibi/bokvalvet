@@ -30,6 +30,9 @@ const UpdatePassword = () => {
           .currentUser.reauthenticateWithCredential(credential)
           .then(() => {
             const user = firebase.auth().currentUser;
+            setCurrentPass("");
+            setNewPass("");
+            setRepeatNewPass("");
             user
               .updatePassword(newPass)
               .then(() => {

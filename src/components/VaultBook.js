@@ -58,7 +58,7 @@ const VaultBook = ({ book, setPopupIsVisible, setBookToRemove }) => {
         >
           <div css={{ textAlign: "center" }}>
             <h2 css={{ fontSize: "20px", margin: "0" }}>{book.title}</h2>
-            {book.authors.map((author, i) => (
+            {book.authors && book.authors.map((author, i) => (
               <p key={`${author}-${i}`} css={{ margin: 0, fontSize: "13px" }}>
                 <i>{author}</i>
               </p>

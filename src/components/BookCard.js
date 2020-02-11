@@ -21,7 +21,8 @@ const BookCard = ({ book: bookInfo }) => {
   }
   function addBook() {
     const image = book.imageLinks ? book.imageLinks.thumbnail : null;
-    addBookToVault(user.uid, bookInfo.id, book.title, image, book.authors).then(resp => {
+    const authors = book.authors ? book.authors : null;
+    addBookToVault(user.uid, bookInfo.id, book.title, image, authors).then(resp => {
       if(resp){
         setAdded(true);
       }
