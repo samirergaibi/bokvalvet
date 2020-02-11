@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Fragment, useState, useEffect, useContext } from "react";
+import { Link } from "@reach/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { db, FirebaseContext } from "../components/Firebase";
 import bigBook from "../images/big-book.png";
@@ -96,6 +98,39 @@ const BookVault = () => {
               Sätt igång direkt och ha allt samlat på en och samma plats.
             </p>
           </div>
+          {books.length === 0 && (
+            <div css={{
+              textAlign: "center"
+            }}>
+              <hr css={{ width: "40vw" }} />
+              <p
+                css={{
+                  textAlign: "center",
+                  color: "#727272",
+                  fontWeight: 600,
+                  letterSpacing: "1px"
+                }}
+              >
+                <em>Ditt bokvalv är tomt...</em>
+              </p>
+              <p>
+                <Link
+                  to="/"
+                  css={{
+                    color: "#1a73e8",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    ":hover": {
+                      textDecoration: "underline"
+                    }
+                  }}
+                >
+                  Lägg till en bok
+                  <FontAwesomeIcon icon="arrow-right" css={{ marginLeft: "3px", fontSize: "14px" }} />
+                </Link>
+              </p>
+            </div>
+          )}
           {books.map(book => {
             return (
               <Fragment key={book.book_id}>
