@@ -70,8 +70,7 @@ const NoteCreator = ({ bookId, editingValue, setEditingValue, setNote }) => {
             transition: "all 0.3s ease 0s",
             boxShadow: "0 5px 10px rgba(0, 0, 0, 0.2)",
             ":hover": {
-              transform: "translateY(-4px)",
-              boxShadow: "0 9px 10px rgba(0, 0, 0, 0.3)"
+              backgroundColor: "#999999"
             },
           }}>Avbryt</button>
         }

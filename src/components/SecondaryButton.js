@@ -23,12 +23,9 @@ const SecondaryButton = (props) => {
         ":hover": {
           backgroundColor: "#479ad3",
           border: "1px solid #479ad3",
-          transform: "translateY(-2px)",
-          boxShadow: "0 7px 10px rgba(0, 0, 0, 0.3)",
         },
         ":active": {
-          transform: "translateY(2px)",
-          boxShadow: "0 3px 10px rgba(0, 0, 0, 0.2)",
+          backgroundColor: "#3282b8",
         },
         ":disabled": {
           color: "#d7d7d7",

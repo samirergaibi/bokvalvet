@@ -105,7 +105,7 @@ const BookCard = ({ book: bookInfo }) => {
             Lägg till i bokvalv
           </SecondaryButton>
         ) : (
-          <SecondaryButton disabled>Lägg till i bokvalv</SecondaryButton>
+          <SecondaryButton disabled title="Logga in för att lägga till i bokvalv">Lägg till i bokvalv</SecondaryButton>
         )}
         <p
           css={{
@@ -113,6 +113,7 @@ const BookCard = ({ book: bookInfo }) => {
             color: "rgba(29, 185, 84, 0.8)",
             fontWeight: 600,
             transition: "all 0.1s",
+            marginBottom: 0
           }}
         >
           Boken har lagts till.

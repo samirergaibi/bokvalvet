@@ -5,6 +5,7 @@ import { Fragment, useContext } from "react";
 
 import mq from "../utils/mediaQueries";
 import firebase, { FirebaseContext } from "./Firebase";
+import Logo from "../images/logo.png";
 
 
 const Nav = ({ isClosed, setIsClosed }) => {
@@ -56,6 +57,18 @@ const Nav = ({ isClosed, setIsClosed }) => {
             flexDirection: "row",
           }
         }}>
+          <Link to="/" css={{
+            display: "none",
+            [mq[2]]: {
+              display: "initial",
+              position: "absolute",
+              top: "0",
+              left: "0",
+              zIndex: "5"
+            }
+          }}>
+            <img src={Logo} alt="logo" css={{ width: "60px" }} />
+          </Link>
           <Link onClick={() => { setIsClosed(!isClosed) }} to="/">Hem</Link>
           <Link onClick={() => { setIsClosed(!isClosed) }} to="/om-bokvalvet">Om Bokvalvet</Link>
         </div>
