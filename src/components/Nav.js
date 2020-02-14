@@ -1,11 +1,12 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Link } from "@reach/router";
 import { Fragment, useContext } from "react";
+import { Link } from "@reach/router";
 
 import mq from "../utils/mediaQueries";
 import firebase, { FirebaseContext } from "./Firebase";
 import Logo from "../images/logo.png";
+import NavLink from "./NavLink";
 
 
 const Nav = ({ isClosed, setIsClosed }) => {
@@ -37,19 +38,7 @@ const Nav = ({ isClosed, setIsClosed }) => {
           justifyContent: "flex-end",
           padding: "5px",
         },
-        "& a": {
-          color: "#fff",
-          textDecoration: "none",
-          fontSize: "32px",
-          margin: "1.5vh 0",
-          [mq[2]]: {
-            fontSize: "20px",
-            marginLeft: "20px",
-            marginRight: "20px"
-          }
-        }
       }}>
-        <p css={{marginRight: "auto"}} id="logo"></p>
         <div css={{
           display: "flex",
           flexDirection: "column",
@@ -62,15 +51,15 @@ const Nav = ({ isClosed, setIsClosed }) => {
             [mq[2]]: {
               display: "initial",
               position: "absolute",
-              top: "0",
-              left: "0",
+              top: "10px",
+              left: "10px",
               zIndex: "5"
             }
           }}>
             <img src={Logo} alt="logo" css={{ width: "60px" }} />
           </Link>
-          <Link onClick={() => { setIsClosed(!isClosed) }} to="/">Hem</Link>
-          <Link onClick={() => { setIsClosed(!isClosed) }} to="/om-bokvalvet">Om Bokvalvet</Link>
+          <NavLink onClick={() => { setIsClosed(!isClosed) }} to="/">Hem</NavLink>
+          <NavLink onClick={() => { setIsClosed(!isClosed) }} to="/om-bokvalvet">Om Bokvalvet</NavLink>
         </div>
         <div css={{
           height: "2px",
@@ -94,14 +83,14 @@ const Nav = ({ isClosed, setIsClosed }) => {
           {
             authRespReceived ? user ? (
               <Fragment>
-                <Link onClick={() => { setIsClosed(!isClosed) }} to="/konto">Konto</Link>
-                <Link onClick={() => { setIsClosed(!isClosed) }} to="/bokvalv">Bokvalv</Link>
-                <Link onClick={() => { setIsClosed(!isClosed); firebase.auth().signOut(); }} to="/logga-in">Logga ut</Link>
+                <NavLink onClick={() => { setIsClosed(!isClosed) }} to="/konto">Konto</NavLink>
+                <NavLink onClick={() => { setIsClosed(!isClosed) }} to="/bokvalv">Bokvalv</NavLink>
+                <NavLink onClick={() => { setIsClosed(!isClosed); firebase.auth().signOut(); }} to="/logga-in">Logga ut</NavLink>
               </Fragment>
               ) : (
                 <Fragment>
-                  <Link onClick={() => { setIsClosed(!isClosed) }} to="/skapa-konto">Skapa konto</Link>
-                  <Link onClick={() => { setIsClosed(!isClosed) }} to="/logga-in">Logga in</Link>
+                  <NavLink onClick={() => { setIsClosed(!isClosed) }} to="/skapa-konto">Skapa konto</NavLink>
+                  <NavLink onClick={() => { setIsClosed(!isClosed) }} to="/logga-in">Logga in</NavLink>
                 </Fragment>
             ) : null
           }
