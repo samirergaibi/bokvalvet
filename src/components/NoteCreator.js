@@ -11,6 +11,7 @@ import mq from "../utils/mediaQueries";
 const NoteCreator = ({ bookId, editingValue, setEditingValue, setNote }) => {
   const { user } = useContext(FirebaseContext);
   const [noteInput, setNoteInput] = useState(editingValue ? editingValue.note : "");
+  const oldNote = editingValue;
   function add(e) {
     e.preventDefault();
     addNote(user.uid, bookId, noteInput);
@@ -55,7 +56,12 @@ const NoteCreator = ({ bookId, editingValue, setEditingValue, setNote }) => {
         </PrimaryButton>
         {
           editingValue &&
-          <button css={{
+          <button
+          onClick={() => {
+            setNote(oldNote);
+            setEditingValue(null);
+          }}
+          css={{
             backgroundColor: "#767676",
             fontSize: "16px",
             border: "none",
