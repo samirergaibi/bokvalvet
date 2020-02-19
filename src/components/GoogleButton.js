@@ -1,7 +1,7 @@
 /** @jsx jsx  */
 import { jsx } from "@emotion/core";
 
-const GoogleBtn = ({ onClick }) => {
+const GoogleButton = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -54,4 +54,4 @@ const GoogleBtn = ({ onClick }) => {
   );
 };
 
-export default GoogleBtn;
+export default GoogleButton;

@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { navigate } from "@reach/router";
 
-import { FirebaseContext } from "../components/Firebase";
+import firebase, { FirebaseContext } from "../components/Firebase";
 import mq from "../utils/mediaQueries";
 import UpdateProfile from "../components/UpdateProfile";
 import UpdatePassword from "../components/UpdatePassword";
@@ -15,6 +15,8 @@ const Account = () => {
   const [provider, setProvider] = useState();
 
   useEffect(() => {
+    console.log(user);
+    console.log(firebase.auth());
     if (authRespReceived && !user) {
       navigate("/");
     } else if (authRespReceived && !user.emailVerified) {
