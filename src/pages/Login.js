@@ -36,7 +36,7 @@ const Login = () => {
       .catch(err => {
         console.log("Error signing in with Facebook: ", err);
         if(err.code === "auth/account-exists-with-different-credential"){
-          setErrorMsg("Konto med denna mejladress existerar redan.");
+          setErrorMsg("Ett konto med denna mejladress existerar redan.");
         }
       });
   }
