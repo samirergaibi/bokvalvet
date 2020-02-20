@@ -20,13 +20,12 @@ const VerifyEmail = () => {
             firebase.auth().currentUser.reload().then(() => {
               navigate("/konto");
             })
-          }, 5000);
+          }, 200);
         }
       })
     }
     return () => {
       if(refreshUser){
-        console.log("clearTimeOut");
         clearTimeout(refreshUser);
       }
     }
