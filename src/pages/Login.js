@@ -32,6 +32,7 @@ const Login = () => {
       .signInWithPopup(provider)
       .then(() => {
         navigate("/konto");
+        console.log("Navigated to /konto");
       })
       .catch(err => {
         console.log("Error signing in with Facebook: ", err);
