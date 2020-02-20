@@ -15,21 +15,19 @@ const Account = () => {
   const [provider, setProvider] = useState();
 
   useEffect(() => {
-    if (authRespReceived && !user) {
-      navigate("/");
-    } else if (authRespReceived && !user.emailVerified) {
-      navigate("/verifiera-epost-adress");
-    }
-  }, [authRespReceived, user]);
-
-  useEffect(() => {
     const userProvider =
       user &&
       user.providerData &&
       user.providerData[0] &&
       user.providerData[0].providerId;
     setProvider(userProvider);
-  }, [user]);
+
+    if (authRespReceived && !user) {
+      navigate("/");
+    } else if (authRespReceived && !user.emailVerified) {
+      navigate("/verifiera-epost-adress");
+    }
+  }, [authRespReceived, user]);
 
   return (
     <Fragment>

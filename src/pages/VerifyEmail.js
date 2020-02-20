@@ -1,6 +1,7 @@
 /** @jsx jsx  */
 import { jsx } from "@emotion/core";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import { navigate } from "@reach/router";
 
 import firebase, { FirebaseContext } from "../components/Firebase";
 import PrimaryButton from "../components/PrimaryButton";
@@ -8,6 +9,28 @@ import PrimaryButton from "../components/PrimaryButton";
 const VerifyEmail = () => {
   const { user } = useContext(FirebaseContext);
   const [emailSent, setEmailSent] = useState(false);
+  
+  useEffect(() => {
+    const currentUser = firebase.auth().currentUser;
+    let refreshUser;
+    if(currentUser){
+      currentUser.providerData.forEach(provider => {
+        if(provider.providerId === "facebook.com"){
+          refreshUser = setTimeout(() => {
+            firebase.auth().currentUser.reload().then(() => {
+              navigate("/konto");
+            })
+          }, 200);
+        }
+      })
+    }
+    return () => {
+      if(refreshUser){
+        clearTimeout(refreshUser);
+      }
+    }
+  }, []);
+
   return (
     <div
       css={{
