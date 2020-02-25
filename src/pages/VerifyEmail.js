@@ -16,9 +16,11 @@ const VerifyEmail = () => {
     if(currentUser){
       currentUser.providerData.forEach(provider => {
         if(provider.providerId === "facebook.com"){
-          refreshUser = setTimeout(() => {
+          refreshUser = setInterval(() => {
             firebase.auth().currentUser.reload().then(() => {
-              navigate("/konto");
+              if(currentUser.emailVerified){
+                navigate("/konto");
+              }
             })
           }, 200);
         }
@@ -26,7 +28,7 @@ const VerifyEmail = () => {
     }
     return () => {
       if(refreshUser){
-        clearTimeout(refreshUser);
+        clearInterval(refreshUser);
       }
     }
   }, []);
