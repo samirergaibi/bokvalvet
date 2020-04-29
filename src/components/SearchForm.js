@@ -10,7 +10,7 @@ const Search = ({
   setSearchResult,
   setStartIndex,
   setSearchTerm,
-  amountToLoad
+  amountToLoad,
 }) => {
   const [searchInput, setSearchInput] = useState("");
 
@@ -21,7 +21,16 @@ const Search = ({
   function bookSearch(e) {
     e.preventDefault();
     if (searchInput) {
-      searchForBook(searchInput, 0, amountToLoad).then(resp => {
+      searchForBook(searchInput, 0, amountToLoad).then((resp) => {
+        // image urls from Google Books API return a http url, so we convert it to https
+        resp.items.forEach(book => {
+          const images = book?.volumeInfo?.imageLinks;
+          if (images) {
+            for (let key in images) {
+              images[key] = images[key].replace(/^http:/, "https:");
+            }
+          }
+        });
         setSearchResult(resp);
         if (window) {
           localStorage.setItem(
@@ -29,7 +38,7 @@ const Search = ({
             JSON.stringify({
               searchString: searchInput,
               searchIndex: amountToLoad,
-              resp
+              resp,
             })
           );
         }
@@ -45,7 +54,7 @@ const Search = ({
       onSubmit={bookSearch}
       css={{
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
       }}
     >
       <Input

@@ -13,12 +13,16 @@ const Book = ({ id }) => {
 
   useEffect(() => {
     getBook(id).then(resp => {
+      // image urls from Google Books API return a http url, so we convert it to https
+      const images = resp?.volumeInfo?.imageLinks;
+      if(images){
+        for(let key in images){
+          images[key] = images[key].replace(/^http:/, 'https:');
+        }
+      }
       setBook(resp.volumeInfo);
     });
   }, [id]);
-  // if (book) {
-  //   book.authors = ["Samir Ergaibi", "Elin Säfström", "Solveig Ergaibi"];
-  // }
 
   return (
     <div
