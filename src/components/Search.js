@@ -32,12 +32,21 @@ const Search = () => {
   }
 
   function loadMore() {
-    searchForBook(searchTerm, startIndex, amountToLoad).then(resp => {
+    searchForBook(searchTerm, startIndex, amountToLoad).then((resp) => {
+      // image urls from Google Books API return a http url, so we convert it to https
+      resp.items.forEach(book => {
+        const images = book?.volumeInfo?.imageLinks;
+        if (images) {
+          for (let key in images) {
+            images[key] = images[key].replace(/^http:/, "https:");
+          }
+        }
+      });
       let previousAndNewResults;
-      setSearchResult(prev => {
+      setSearchResult((prev) => {
         previousAndNewResults = {
           ...prev,
-          items: [...prev.items, ...resp.items]
+          items: [...prev.items, ...resp.items],
         };
         return previousAndNewResults;
       });
@@ -47,12 +56,12 @@ const Search = () => {
           JSON.stringify({
             searchString: searchTerm,
             searchIndex: startIndex + amountToLoad,
-            resp: previousAndNewResults
+            resp: previousAndNewResults,
           })
         );
       }
     });
-    setStartIndex(prev => prev + amountToLoad);
+    setStartIndex((prev) => prev + amountToLoad);
   }
   return (
     <Fragment>
@@ -61,8 +70,8 @@ const Search = () => {
           width: "80vw",
           margin: "0 auto 5vh auto",
           [mq[2]]: {
-            width: "30vw"
-          }
+            width: "30vw",
+          },
         }}
       >
         <div
@@ -72,9 +81,9 @@ const Search = () => {
               marginLeft: "auto",
               marginRight: "auto",
               [mq[2]]: {
-                width: "10vw"
-              }
-            }
+                width: "10vw",
+              },
+            },
           }}
         >
           <SearchForm
@@ -89,7 +98,7 @@ const Search = () => {
             css={{
               textAlign: "center",
               fontSize: "14px",
-              marginTop: "8px"
+              marginTop: "8px",
             }}
           >
             <p>
@@ -98,18 +107,20 @@ const Search = () => {
             <p>
               Hittar du inte din bok? Sök på{" "}
               <a
-                href={`https://www.google.com/search?q=${searchTerm.split(" ").join("+")}+bok+engelska`}
+                href={`https://www.google.com/search?q=${searchTerm
+                  .split(" ")
+                  .join("+")}+bok+engelska`}
                 rel="noopener noreferrer"
                 target="_blank"
                 css={{
                   color: "#1a73e8",
                   textDecoration: "none",
                   ":hover": {
-                    textDecoration: "underline"
-                  }
+                    textDecoration: "underline",
+                  },
                 }}
               >
-               bokens engelska namn.
+                bokens engelska namn.
               </a>
             </p>
           </div>
@@ -127,11 +138,11 @@ const Search = () => {
               width: "100%",
               margin: "0 auto",
               "& svg": {
-                marginRight: "3px"
+                marginRight: "3px",
               },
               ":hover": {
-                textDecoration: "underline"
-              }
+                textDecoration: "underline",
+              },
             }}
           >
             <FontAwesomeIcon icon={["far", "trash-alt"]} />
@@ -147,11 +158,11 @@ const Search = () => {
               margin: "5vh auto",
               textAlign: "center",
               [mq[2]]: {
-                width: "90vw"
+                width: "90vw",
               },
               [mq[3]]: {
-                width: "80vw"
-              }
+                width: "80vw",
+              },
             }}
           >
             <SearchResult result={searchResult} />
@@ -160,9 +171,9 @@ const Search = () => {
                 "& button": {
                   marginTop: 0,
                   [mq[2]]: {
-                    marginTop: "10vh"
-                  }
-                }
+                    marginTop: "10vh",
+                  },
+                },
               }}
             >
               <PrimaryButton onClick={loadMore}>Ladda fler</PrimaryButton>
